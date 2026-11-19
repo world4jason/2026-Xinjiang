@@ -3,7 +3,7 @@
 // shell/runtime, and activating one cannot delete the other's cache.
 const CACHE_PREFIX = "travel-lite:" + new URL(self.registration.scope).pathname
   .replace(/[^a-z0-9]/gi, "-") + ":";
-const CACHE = CACHE_PREFIX + "shell-v66-xinjiang-extras";
+const CACHE = CACHE_PREFIX + "shell-v67-xinjiang-appearance";
 const RUNTIME_CACHE = CACHE_PREFIX + "runtime-v1";
 const scopeUrl = (path) => new URL(path, self.registration.scope).href;
 const INDEX = scopeUrl("./index.html");
@@ -51,14 +51,14 @@ const CORE = [
   "./journey-groups.js?v=20261119-amap-v2",
   "./china-maps.js?v=20261119-amap-v1",
   "./app.js?v=20261119-overview-light-v1",
-  "./trip-view.js?v=20261119-amap-extras-v4",
+  "./trip-view.js?v=20261119-amap-extras-v5",
   "./runtime-providers.js?v=20261118-history-v2",
   "./runtime-features.js?v=20261119-t2-v3",
   "./runtime-handoff.js",
   "./places-view.js?v=20261119-amap-venue-v3",
   "./transport-overview.js",
   "./runtime-google.js?v=20261119-t2-v3",
-  "./theme-shell.js",
+  "./theme-shell.js?v=20261119-passive-theme-v1",
   "./responsive-shell.js",
   "./companion-ux.js?v=20261119-overview-light-v1",
   "./timezone.js",
