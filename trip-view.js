@@ -389,7 +389,7 @@
     const summary = `<section class="day-summary composition-identity">
         <p class="eyebrow">${escapeHtml(day.label || "")} · ${prettyDate(day.date, { weekday: "short" })}</p>
         <h2>${escapeHtml(day.title || "Trip")}</h2>
-        <p>${entries.length} ${localized("項行程", "planned stops")}</p>
+        <p>${entries.length} ${localized("個行程項目", "itinerary items")}</p>
         ${noteDetail}
       </section>`;
 
