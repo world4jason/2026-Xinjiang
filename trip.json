@@ -6,8 +6,8 @@
     "startDate": "2026-11-27",
     "endDate": "2026-12-04",
     "timezone": "Asia/Shanghai",
-    "updatedAt": "2026-11-19T11:58:35.072Z",
-    "revision": "xinjiang-2026-11-19-02",
+    "updatedAt": "2026-11-19T20:35:00+08:00",
+    "revision": "xinjiang-2026-11-19-03",
     "homeLabel": "新疆・中國",
     "center": {
       "lat": 43.78,
@@ -214,7 +214,12 @@
                 "label": "高德地圖－景點位置",
                 "url": "https://www.amap.com/place/B0FFFPTZKE"
               }
-            ]
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Altay_China_horizon_-_Jiangjunshan_Ski_Resort.jpg?width=960",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:Altay_China_horizon_-_Jiangjunshan_Ski_Resort.jpg",
+            "imageCredit": "Pazakui / Wikimedia Commons",
+            "imageLicense": "CC BY 4.0",
+            "imageAlt": "冬季阿勒泰市及遠方將軍山滑雪場雪道（2025 年實景）"
           },
           "lat": 47.839271,
           "lng": 88.161438,
@@ -427,7 +432,12 @@
                 "label": "高德地圖－景點位置",
                 "url": "https://www.amap.com/place/B0FFLBPIDY"
               }
-            ]
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Escape-%E9%80%83.jpg?width=960",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:Escape-%E9%80%83.jpg",
+            "imageCredit": "Elaine_zyz（張迎梓） / Wikimedia Commons",
+            "imageLicense": "CC BY-SA 4.0",
+            "imageAlt": "喀納斯神仙灣河谷全景（非冬季拍攝）"
           },
           "lat": 48.658992,
           "lng": 87.040845,
@@ -455,7 +465,12 @@
                 "label": "高德地圖－景點位置",
                 "url": "https://www.amap.com/place/B0FFLBPIOC"
               }
-            ]
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%E5%96%80%E7%BA%B3%E6%96%AF%E6%99%AF%E5%8C%BA%E6%9C%88%E4%BA%AE%E6%B9%BE.jpg?width=960",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:%E5%96%80%E7%BA%B3%E6%96%AF%E6%99%AF%E5%8C%BA%E6%9C%88%E4%BA%AE%E6%B9%BE.jpg",
+            "imageCredit": "Yanxutong1215 / Wikimedia Commons",
+            "imageLicense": "CC BY-SA 4.0",
+            "imageAlt": "喀納斯月亮灣河曲（2021 年夏季實景）"
           },
           "lat": 48.640995,
           "lng": 87.045764,
@@ -483,7 +498,12 @@
                 "label": "高德地圖－景點位置",
                 "url": "https://gaode.com/place/B0FFLBPIQO"
               }
-            ]
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%E5%96%80%E7%BA%B3%E6%96%AF_%E5%8D%A7%E9%BE%99%E6%B9%BE_-_panoramio_-_neverdance_(1).jpg?width=960",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:%E5%96%80%E7%BA%B3%E6%96%AF_%E5%8D%A7%E9%BE%99%E6%B9%BE_-_panoramio_-_neverdance_(1).jpg",
+            "imageCredit": "neverdance / Wikimedia Commons",
+            "imageLicense": "CC BY-SA 3.0",
+            "imageAlt": "喀納斯臥龍灣河曲與河心洲（非冬季拍攝）"
           },
           "lat": 48.621543,
           "lng": 87.054179,
@@ -605,7 +625,12 @@
                 "label": "高德地圖－景點位置",
                 "url": "https://www.amap.com/place/B03DE0004L"
               }
-            ]
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%E7%83%8F%E7%88%BE%E7%A6%BE%E9%9B%85%E4%B8%B9%E5%9C%B0%E8%B2%8C02.jpg?width=960",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:%E7%83%8F%E7%88%BE%E7%A6%BE%E9%9B%85%E4%B8%B9%E5%9C%B0%E8%B2%8C02.jpg",
+            "imageCredit": "Newbamboo / Wikimedia Commons",
+            "imageLicense": "CC BY-SA 4.0",
+            "imageAlt": "新疆烏爾禾雅丹岩層地貌（2018 年夏季實景）"
           },
           "lat": 46.135149,
           "lng": 85.733205,
@@ -688,7 +713,12 @@
                 "label": "高德地圖－景點位置",
                 "url": "https://www.amap.com/place/B038D0LN3D"
               }
-            ]
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sayram_Lake_on_north_bank.jpg?width=960",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:Sayram_Lake_on_north_bank.jpg",
+            "imageCredit": "Y Chen / Wikimedia Commons",
+            "imageLicense": "CC BY-SA 4.0",
+            "imageAlt": "賽里木湖北岸景色（2018 年 12 月實景，非冰泡保證）"
           },
           "lat": 44.617077,
           "lng": 81.386542,
@@ -791,7 +821,12 @@
                 "label": "高德地圖－景點位置",
                 "url": "https://www.amap.com/place/B0FFG2BGUQ"
               }
-            ]
+            ],
+            "image": "https://images.unsplash.com/photo-1737105221863-999bfabbdaf3?auto=format&fit=crop&w=960&q=80",
+            "imageSource": "https://unsplash.com/photos/a-view-of-a-body-of-water-with-mountains-in-the-background-XNeiVYjPMo8",
+            "imageCredit": "Squids Z / Unsplash",
+            "imageLicense": "Unsplash License",
+            "imageAlt": "獨山子大峽谷河谷與褐色岩壁實景（非冬季拍攝）"
           },
           "lat": 44.149387,
           "lng": 84.758415,
@@ -831,10 +866,10 @@
                 "url": "https://www.amap.com/place/B03DF05V5I"
               }
             ],
-            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/20231218_Xinjiang_International_Grand_Bazaar_02.jpg?width=900",
-            "imageAlt": "新疆國際大巴扎具有地域風格的建築與廣場",
-            "imageSource": "https://commons.wikimedia.org/wiki/File:20231218_Xinjiang_International_Grand_Bazaar_02.jpg",
-            "imageCredit": "Windmemories / Wikimedia Commons",
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Bazaar_day_time.jpg?width=960",
+            "imageAlt": "新疆烏魯木齊國際大巴扎日間建築（2017 年實景）",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:Bazaar_day_time.jpg",
+            "imageCredit": "Leeee870101 / Wikimedia Commons",
             "imageLicense": "CC BY-SA 4.0"
           },
           "lat": 43.780006,
