@@ -317,7 +317,8 @@
               "label": "高德地圖・景區參考點",
               "url": "https://uri.amap.com/marker?position=87.433003%2C48.568644&name=%E7%A6%BE%E6%9C%A8%E6%9D%91%E3%83%BB%E5%9C%96%E7%93%A6%E9%9B%AA%E6%99%AF%E6%9C%A8%E5%B1%8B&coordinate=gaode&src=TravelLite&callnative=0"
             }
-          ]
+          ],
+          "venueName": "禾木村"
         },
         {
           "id": "d3-meilifeng-photos",
@@ -525,7 +526,8 @@
               "label": "高德地圖・景區參考點",
               "url": "https://uri.amap.com/marker?position=87.025867%2C48.712438&name=%E5%96%80%E7%B4%8D%E6%96%AF%E6%B9%96%E3%83%BB%E5%86%AC%E5%AD%A3%E9%9B%AA%E6%99%AF&coordinate=gaode&src=TravelLite&callnative=0"
             }
-          ]
+          ],
+          "venueName": "喀納斯湖"
         },
         {
           "id": "d4-drive-to-burqin",
