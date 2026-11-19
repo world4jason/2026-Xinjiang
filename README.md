@@ -1,13 +1,41 @@
-# 2026 北疆雙湖・八天七晚冬季旅行
+# 2026 北疆雙湖｜八天七晚冬季旅程
 
-旅程：2026/11/27–12/04｜桃園－上海浦東－烏魯木齊－阿勒泰－禾木－喀納斯－布爾津－奎屯－賽里木湖－烏魯木齊－桃園
+**旅行時間：2026/11/27（五）– 12/04（五）**　｜　資料版本：2026/11/19
 
-本網站由 [Travel Lite Template](https://github.com/world4jason/Travel-lite-Template) 建立，使用 `trip.json` 作為每日行程、航班、住宿及準備清單的單一資訊來源。採繁體中文、五分頁、時間軸、交通與景點目錄、Open-Meteo 天氣，以及可離線參考的 PWA。
+### 行程網站
 
-**資料依據**：旅遊團提供《【曠野長明】北疆雙湖 8天7晚冬季行前說明手冊》（5 頁）及 2026/11/19 導遊補充公告。團體旅程各日上車時刻、實際住宿與開放設施以領隊最新公告為準；未確認時刻一律保留 TBD。公開頁面不含團員證件號碼、私人票券或訂位代碼。
+**[開啟旅行網站（GitHub Pages）](https://world4jason.github.io/2026-Xinjiang/)**
 
-**發布**：GitHub Repository → Settings → Pages → Deploy from a branch → `main` / `(root)`。
+使用 [Travel Lite Template](https://github.com/world4jason/Travel-lite-Template) 的完整靜態網站架構，提供繁體中文五分頁：**現在／行程／交通／景點／更多**。保留天氣日期卡、日程時間軸、Google Maps A→B 路線、景點高德地圖、離線參考、個人檢查清單、手機與桌面排版。無需 API key。
 
-**授權**：本專案承襲 Travel Lite Template，保留 AGPL-3.0-or-later `LICENSE`、`NOTICE.md` 及原始來源聲明。程式碼及改作內容可在本儲存庫查看。
+### 八日概覽
 
-**驗收**：請參照 `AGENTS.md`、`docs/UIUX.md`，執行 `npm run lint:uiux`、`npm run test:uiux`、`npm run test:timeline` 與瀏覽器回歸測試。
+| 日期 | 路線與景點 | 參考住宿 |
+| --- | --- | --- |
+| 11/27 | 桃園 T2 → 上海浦東 T1 → 烏魯木齊（翌日凌晨抵達） | 亞欣國際酒店 |
+| 11/28 | S21 沙漠公路 → 阿勒泰 → 將軍山 | 鼎洲酒店 |
+| 11/29 | 阿勒泰 → 禾木 → 美麗峰旅拍／吉克普林自選 | 軒園山居雪景木屋 |
+| 11/30 | 禾木晨曦 → 喀納斯三灣與湖 → 布爾津 | 環疆酒店 |
+| 12/01 | 布爾津 → 烏爾禾世界魔鬼城 → 奎屯 | 萬達美華酒店 |
+| 12/02 | 奎屯 → 賽里木湖 VIP 環湖 | FF 設計師酒店 |
+| 12/03 | 賽里木湖 → 獨山子大峽谷 → 國際大巴扎 | 橄欖苑酒店 |
+| 12/04 | 烏魯木齊 → 上海浦東 T1 → 桃園 T2 | — |
+
+**注意：** 以上酒店均為團方手冊的「或同級」參考住宿。所有未發布的當日上車、活動及抵達時刻保留 `TBD`，不自行推定。11/28 夜滑與 11/29 吉克普林雪票自理，12/02 藍冰／冰泡依結冰狀況，不保證出現。
+
+### 行前資料
+
+- 四段班機、T2 12:00 集合與上海轉機：整理於 `trip.json`。
+- 證件、CCC 行動電源、極寒穿搭、6 頓早餐／自理餐、支付與網卡：見網站「更多」及 `trip.json` 的 `checklists`、`essentials`。
+- 景點來自可核對的政府／觀光資訊，10 個景點座標提供高德地圖外部連結；使用 Wikimedia Commons 圖片的卡片附作者與授權。
+- 原始資料：旅行團提供的五頁《【曠野長明】北疆雙湖 8 天 7 晚冬季行前說明手冊》及 2026/11/19 導遊公告；整理原則與仍待確認事項請見 [docs/TRIP-SOURCE-NOTES.md](docs/TRIP-SOURCE-NOTES.md)。不將私人票券或證件資料放進公開站。
+
+### 更新與測試
+
+修改 `trip.json` 後，提交至 `main` 即可由已啟用的 GitHub Pages 發布。請依 [docs/UIUX.md](docs/UIUX.md) 執行 `npm run lint:uiux`、`npm run test:uiux`、`npm run test:timeline`、`npm run test:journey`、`npm run test:places-curation`，並在瀏覽器檢查手機與桌面版。
+
+本次自動部署成功；自訂 `Chronological Timeline Contract` 工作流程因 GitHub 未配置 runner（無 step logs）未能執行測試，**不視為驗收通過**。此版本 `trip.publication` 維持 `draft/not-run`，等待人工審查。
+
+### 著作權
+
+遵循 [LICENSE](LICENSE) 與 [NOTICE.md](NOTICE.md)：沿用之程式碼受 AGPL-3.0-or-later 及其原始來源聲明約束，保留授權資訊。
