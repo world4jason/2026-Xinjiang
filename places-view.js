@@ -1,0 +1,283 @@
+/* Reusable read-only Places directory and context. No discovery or secrets. SPDX-License-Identifier: AGPL-3.0-or-later */
+(() => {
+  let filterDate = "all";
+  // All published trip days are selectable, including a day with no Places.
+  // The rendered Places list may then legitimately show its empty state.
+  const availableDates = () => new Set((state.data?.days || []).map(day => day.date));
+  const validFilter = date => date === "all" || availableDates().has(date) ? date : "all";
+  const currentListHash = () => filterDate === "all" ? "#places" : "#places/day/" + encodeURIComponent(filterDate);
+  function pushRoute(hash) {
+    if (location.hash !== hash) history.pushState({travelLite:"places"}, "", location.pathname + location.search + hash);
+  }
+  function applyRouteDate(date, persist = true) {
+    filterDate = validFilter(date);
+    // The date is shared across Trip/Transport/Places; only All/Day mode
+    // remains Places-specific. Never retain a second independently selected date.
+    if (filterDate !== "all") {
+      state.selectedDate = filterDate;
+      TravelLiteStorage.set(tripKey("ui:selectedDate"), filterDate);
+    }
+    if (persist) TravelLiteStorage.set(tripKey("places:mode"), filterDate === "all" ? "all" : "day");
+    return filterDate;
+  }
+  async function hydrateFilter() {
+    // Legacy places:date contains a date or 'all'. Migrate its intent to
+    // places:mode, keeping the single ui:selectedDate as actual date truth.
+    const mode = await TravelLiteStorage.get(tripKey("places:mode"));
+    const legacy = await TravelLiteStorage.get(tripKey("places:date"));
+    const savedMode = mode === "all" || mode === "day" ? mode
+      : validFilter(legacy) === "all" ? "all" : "day";
+    // The old Places date is only an All/Day mode hint. Never overwrite
+    // ui:selectedDate with a possibly stale, formerly independent date.
+    filterDate = savedMode === "day" ? validFilter(state.selectedDate) : "all";
+    if (mode !== "all" && mode !== "day")
+      await TravelLiteStorage.set(tripKey("places:mode"), savedMode);
+  }
+  function selectFilter(date) {
+    const next = validFilter(date);
+    if (next === filterDate) return;
+    applyRouteDate(next);
+    state.selectedPlaceId = null;
+    pushRoute(currentListHash());
+    render();
+  }
+  const excludedTypes = new Set(["transport", "stay", "flight", "transfer", "lodging", "hotel", "drive", "bus", "train", "break", "rest", "wait", "event", "activity", "procedure", "preparation"]);
+  const namedTypes = new Set(["place", "attraction", "museum", "landmark", "nature", "sight"]);
+  const zh = () => /^zh/i.test(state.data?.ui?.locale || "");
+  const label = (cn, en) => zh() ? cn : en;
+  const safeHttp = (raw) => {
+    if (typeof raw !== "string" || !raw.trim()) return "";
+    try {
+      // Allow relative public static-file links as well as explicit HTTP(S).
+      const url = new URL(raw.trim(), window.location.href);
+      return ["http:", "https:"].includes(url.protocol) && !url.username && !url.password
+        ? url.href : "";
+    } catch { return ""; }
+  };
+  const hasLocation = (item) => Boolean(item.location || item.mapQuery ||
+    (item.lat != null && item.lng != null && Number.isFinite(Number(item.lat)) && Number.isFinite(Number(item.lng))));
+  function isPlace(item) {
+    if (!item || !item.id || !item.title) return false;
+    const type = String(item.type || "").trim().toLowerCase();
+    if (excludedTypes.has(type)) return false;
+    // Search/map coordinates do not make an activity, meal, or waiting
+    // period a tourist attraction. A known restaurant is a separate venue
+    // category, not a generic food stop.
+    if (type === "food") return false;
+    if (type === "restaurant") return Boolean(item.venueName && item.infoCard?.summary);
+    return namedTypes.has(type);
+  }
+  function entries() {
+    return state.data.days.flatMap((day) =>
+      (day.items || []).filter(isPlace).map((item) => ({ item, day })));
+  }
+  function isUniquePlaceId(id) {
+    // Published item IDs can accidentally collide across days. Do not associate
+    // a ticket or booking with the wrong visit when source identity is ambiguous.
+    return state.itemIdentity?.isUnique(id) === true;
+  }
+  function linked(records, id) {
+    if (!isUniquePlaceId(id)) return [];
+    return (Array.isArray(records) ? records : []).filter((entry) =>
+      entry && (entry.itemId === id || (Array.isArray(entry.itemIds) && entry.itemIds.includes(id))));
+  }
+  function badges(item) {
+    const rs = linked(state.data.reservations, item.id);
+    const fs = linked(state.data.files, item.id);
+    return { reservations: rs, files: fs, hasEntry: Boolean(rs.length || fs.length) };
+  }
+  function smallDay(entry) {
+    return [entry.day.label, prettyDate(entry.day.date, {weekday:"short"}),
+      /^\d{2}:\d{2}$/.test(entry.item.start || "") ? entry.item.start : ""].filter(Boolean).join(" · ");
+  }
+  function linksHtml(links) {
+    return (Array.isArray(links) ? links : []).flatMap((link) => {
+      const url = safeHttp(link?.url);
+      if (!url || !link?.label) return [];
+      return [`<a class="places-source-link" href="${escapeAttr(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)} <span aria-hidden="true">↗</span></a>`];
+    }).join("");
+  }
+  function cardHtml(entry) {
+    const item = entry.item;
+    const contents = badges(item);
+    const info = item.infoCard || {};
+    const excerpt = info.summary || label("景點介紹尚待整理", "Place guide not yet curated");
+    const thumbnail = safeHttp(info.image);
+    const imageAlt = info.imageAlt || item.location || item.title;
+    const unique = isUniquePlaceId(item.id);
+    const start = unique
+      ? `<button class="places-card panel" data-open-place="${escapeAttr(item.id)}" type="button">`
+      : `<article class="places-card panel places-ambiguous-card" data-ambiguous-place aria-label="${label("景點來源 ID 不明確", "Place source ID is ambiguous")}">`;
+    return `${start}
+      ${thumbnail ? `<img class="places-card-photo" src="${escapeAttr(thumbnail)}" alt="${escapeAttr(imageAlt)}" loading="lazy" referrerpolicy="no-referrer">` : ""}
+      <span class="places-card-meta">${escapeHtml(smallDay(entry))}</span>
+      <span class="places-card-title">${escapeHtml(item.title)}</span>
+      <span class="places-card-excerpt">${escapeHtml(excerpt)}</span>
+      <span class="places-card-foot"><span>${escapeHtml(item.location || label("這趟行程的地點", "Planned place"))}</span>
+      ${contents.hasEntry ? `<span class="places-entry-chip">${label("入場／預約", "Entry / booking")}</span>` : ""}
+      ${unique ? `<span class="places-card-arrow" aria-hidden="true">↗</span>` : ""}</span>
+      ${unique ? "" : `<span class="places-card-identity-label">${label("來源 ID 重複／無效：請修正發佈資料", "Duplicate/invalid source ID: publishing fix required")}</span>`}
+    ${unique ? "</button>" : "</article>"}`;
+  }
+  function listView(all) {
+    const selected = filterDate === "all" ? all : all.filter((entry) => entry.day.date === filterDate);
+    const dates = [...new Set(all.map((entry) => entry.day.date))];
+    const tabs = [`<button type="button" data-places-date="all" class="places-filter ${filterDate === "all" ? "active" : ""}" aria-pressed="${filterDate === "all"}">${label("全部日期", "All days")}</button>`]
+      .concat(dates.map((date) => {
+        const day = state.data.days.find((d) => d.date === date);
+        return `<button type="button" data-places-date="${escapeAttr(date)}" class="places-filter ${filterDate === date ? "active" : ""}" aria-pressed="${filterDate === date}">${escapeHtml(day?.label || prettyDate(date))}</button>`;
+      })).join("");
+    // Avoid 32 clipped, unreachable day chips on long trips.
+    const picker = dates.length > 7
+      ? `<label class="places-date-picker"><span>${label("選擇日期", "Choose day")}</span><select data-places-select aria-label="${label("依日期篩選景點", "Filter places by day")}"><option value="all" ${filterDate === "all" ? "selected" : ""}>${label("全部日期", "All days")}</option>${dates.map((date) => {
+          const day = state.data.days.find((d) => d.date === date);
+          return `<option value="${escapeAttr(date)}" ${filterDate === date ? "selected" : ""}>${escapeHtml(day?.label || prettyDate(date))} · ${escapeHtml(prettyDate(date))}</option>`;
+        }).join("")}</select></label>`
+      : dates.length > 1 ? `<div class="places-filters" role="group" aria-label="${label("依日期篩選景點", "Filter places by day")}">${tabs}</div>` : "";
+    root.innerHTML = `<div class="places-view view-stack">
+      ${itemIdentityWarningHtml()}
+      <header class="places-heading">
+        <h2>${label("景點指南", "Places")}</h2>
+        <span class="places-count">${all.length} ${label("個景點", "places")}</span>
+      </header>
+      ${picker}
+      <div class="places-grid">${selected.length ? selected.map(cardHtml).join("") :
+        `<section class="panel empty-state"><h3>${label("這天沒有已安排的景點", "No planned places for this day")}</h3><p>${label("交通、住宿與未確定的地點不會被當成景點補入。", "Transport and accommodation are not invented as attractions.")}</p></section>`}</div>
+    </div>`;
+  }
+  function reservationHtml(record) {
+    const url = safeHttp(record.url);
+    const status = record.status ? `<span class="places-status">${escapeHtml(record.status)}</span>` : "";
+    return `<article class="places-booking-row"><div><strong>${escapeHtml(record.title || label("預約", "Reservation"))}</strong> ${status}
+      <p>${escapeHtml([record.date || "", record.time || "", record.location || ""].filter(Boolean).join(" · "))}</p></div>
+      ${url ? `<a class="places-source-link" href="${escapeAttr(url)}" target="_blank" rel="noopener noreferrer">${label("開啟預約來源", "Open booking link")} ↗</a>` : ""}</article>`;
+  }
+  function fileHtml(record) {
+    const url = safeHttp(record.url);
+    // An attached private ticket URI is never accepted from untrusted schemes.
+    return `<article class="places-booking-row"><div><strong>${escapeHtml(record.title || label("文件", "File"))}</strong>
+      ${record.type ? `<p>${escapeHtml(record.type)}</p>` : ""}</div>
+      ${url ? `<a class="places-source-link" href="${escapeAttr(url)}" target="_blank" rel="noopener noreferrer">${label("開啟已提供的連結", "Open supplied link")} ↗</a>` : ""}</article>`;
+  }
+  function detailView(entry) {
+    const item = entry.item;
+    const info = item.infoCard || {};
+    const content = badges(item);
+    const photo = safeHttp(info.image);
+    const photoSource = safeHttp(info.imageSource);
+    const photoCaption = [info.imageCredit, info.imageLicense].filter(Boolean).join(" · ");
+    const photoAlt = info.imageAlt || item.location || item.title;
+    const map = safeHttp(googleMapsOpenUrl(item));
+    const facts = (Array.isArray(info.facts) ? info.facts : []).filter(Boolean);
+    const sources = linksHtml(info.sourceLinks);
+    const extras = linksHtml(item.externalLinks);
+    const hasAbout = Boolean(info.title || info.summary || facts.length || photo);
+    const hasBooking = content.reservations.length || content.files.length;
+    const ambiguousId = !isUniquePlaceId(item.id);
+    root.innerHTML = `<div class="places-view places-detail-view view-stack">
+      ${ambiguousId ? `<section class="panel places-identity-warning" role="alert">${label("景點 ID 重複：無法安全對應票券或唯一深連結，請修正行程來源。", "Duplicate place ID: booking association and unique deep links are unavailable until the source is corrected.")}</section>` : ""}
+      <button type="button" class="places-back" data-places-back>← ${label("全部景點", "All places")}</button>
+      <header class="places-detail-heading">
+        <p class="eyebrow">${escapeHtml(smallDay(entry))}</p><h2>${escapeHtml(item.title)}</h2>
+        <p>${escapeHtml(item.location || label("地點資訊未提供", "Location not provided"))}</p>
+      </header>
+      ${hasBooking ? `<section class="panel places-entry">
+        <div class="places-section-top"><span aria-hidden="true">${(window.TravelLiteIcons?.svg?.("ticket") || "")}</span><div><p class="eyebrow">${label("入場與預約", "ENTRY & BOOKING")}</p><h3>${label("已連結的預約／票券", "Linked bookings & tickets")}</h3></div></div>
+        ${content.reservations.map(reservationHtml).join("")}${content.files.map(fileHtml).join("")}
+        <p class="places-disclaimer">${label("僅顯示已明確關聯的資料；預約狀態與現場規則請依業者確認。", "Only explicitly linked records are shown. Confirm reservation status and entry rules with the operator.")}</p>
+      </section>` : ""}
+      ${hasAbout ? `<section class="panel places-about">
+        <p class="eyebrow">${label("景點介紹", "PLACE GUIDE")}</p>
+        <h3>${escapeHtml(info.title || item.title)}</h3>
+        ${photo ? `<figure class="places-photo-figure"><img src="${escapeAttr(photo)}" alt="${escapeAttr(photoAlt)}" loading="lazy" referrerpolicy="no-referrer" class="places-photo">
+          ${photoCaption ? `<figcaption>${photoSource ? `<a href="${escapeAttr(photoSource)}" target="_blank" rel="noopener noreferrer">${escapeHtml(photoCaption)}</a>` : escapeHtml(photoCaption)}</figcaption>` : ""}</figure>` : ""}
+        ${info.summary ? `<p>${escapeHtml(info.summary)}</p>` : ""}
+        ${facts.length ? `<ul>${facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join("")}</ul>` : ""}
+        ${sources ? `<div class="places-links"><strong>${label("資料來源", "Sources")}</strong>${sources}</div>` : ""}
+      </section>` : ""}
+      ${item.note || extras ? `<section class="panel places-notes"><p class="eyebrow">${label("參觀與實用資訊", "PRACTICAL NOTES")}</p>
+        ${item.note ? `<p>${escapeHtml(item.note)}</p>` : ""}
+        ${extras ? `<div class="places-links">${extras}</div>` : ""}
+      </section>` : ""}
+      ${!hasAbout && !hasBooking && !item.note ? `<section class="panel places-empty-context"><p>${label("尚無已提供的景點介紹或入場資料；仍可查看已安排的時間與位置。", "No published guide or admission details for this place. Its itinerary and location remain available.")}</p></section>` : ""}
+      ${window.TravelLitePlanB?.(item.planB) || ""}
+      <nav class="panel places-actions" aria-label="${label("景點操作", "Place actions")}">
+        <button type="button" class="button-link primary" data-places-trip="${escapeAttr(item.id)}">${label("查看當日行程", "View in Trip")}</button>
+        ${map ? `<a class="button-link" href="${escapeAttr(map)}" target="_blank" rel="noopener noreferrer">${label("在地圖中開啟", "Open in Maps")} ↗</a>` : ""}
+        <button type="button" class="button-link" data-places-transport="${escapeAttr(item.id)}">${label("交通與位置", "Transport & location")}</button>
+      </nav>
+    </div>`;
+  }
+  function render() {
+    // A date chosen in Trip or Transport follows us if Places is in Day mode.
+    // An explicit Places All mode is retained independently of the shared day.
+    if (filterDate !== "all" && validFilter(state.selectedDate) !== "all")
+      filterDate = state.selectedDate;
+    const all=entries();
+    const ref=state.itemIdentity?.resolveUnique(state.selectedPlaceId);
+    const selected=ref && isPlace(ref.item) ? {item:ref.item,day:ref.day} : null;
+    if (state.selectedPlaceId && !selected) {
+      root.innerHTML = `<div class="places-view places-detail-view view-stack">
+        ${itemIdentityWarningHtml() || `<section class="panel places-identity-warning" role="alert">${label("景點連結沒有唯一對應的來源資料。", "This place link has no unique published source item.")}</section>`}
+        <button type="button" class="places-back" data-places-back>← ${label("返回景點列表", "Back to Places")}</button></div>`;
+      return;
+    }
+    if (selected) detailView(selected);
+    else listView(all);
+  }
+  function open(id) {
+    if (typeof id !== "string" || !id) return;
+    const entry = state.itemIdentity?.resolveUnique(id);
+    if (entry?.day?.date && availableDates().has(entry.day.date)) {
+      state.selectedDate = entry.day.date;
+      TravelLiteStorage.set(tripKey("ui:selectedDate"), state.selectedDate);
+    }
+    state.selectedPlaceId = id;
+    pushRoute("#places/item/" + encodeURIComponent(id));
+    setView("places");
+  }
+  // Remote Commons thumbnails may be blocked by the client; hide the failed
+  // image without leaving a broken icon or removing the verified guide text.
+  root.addEventListener("error", (event) => {
+    const img=event.target;
+    if (img?.matches?.(".places-photo, .places-card-photo")) {
+      // Retain the licensed image-source citation even if the photo fails.
+      img.remove();
+    }
+  }, true);
+  root.addEventListener("click", (event) => {
+    const target = event.target.closest("[data-open-place],[data-places-back],[data-places-date],[data-places-trip],[data-places-transport]");
+    if (!target) return;
+    if (target.hasAttribute("data-open-place")) open(target.dataset.openPlace);
+    else if (target.hasAttribute("data-places-back")) { state.selectedPlaceId = null; pushRoute(currentListHash()); render(); }
+    else if (target.hasAttribute("data-places-date")) { selectFilter(target.dataset.placesDate); }
+    else if (target.hasAttribute("data-places-trip") || target.hasAttribute("data-places-transport")) {
+      const id=target.dataset.placesTrip || target.dataset.placesTransport;
+      const entry=state.itemIdentity?.resolveUnique(id);
+      if (!entry || !isPlace(entry.item)) return;
+      state.selectedDate=entry.day.date;
+      TravelLiteStorage.set(tripKey("ui:selectedDate"), state.selectedDate);
+      if (target.hasAttribute("data-places-transport")) {
+        state.selectedMapItemId = id;
+        pushRoute("#map/day/" + encodeURIComponent(entry.day.date) + "/stop/" + encodeURIComponent(id));
+        setView("map");
+      } else {
+        pushRoute("#trip/day/" + encodeURIComponent(entry.day.date));
+        setView("trip");
+        requestAnimationFrame(() => {
+          [...root.querySelectorAll("[data-trip-day]")].find((node) =>
+            node.dataset.tripDay === entry.day.date)?.click();
+        });
+      }
+    }
+  });
+  root.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-places-select]");
+    if (!select) return;
+    selectFilter(select.value);
+  });
+  window.TravelLitePlaces = Object.freeze({
+    isPlace,render,open,entries,hydrateFilter,applyRouteDate,currentListHash,
+    getFilterDate: () => filterDate,
+  });
+})();

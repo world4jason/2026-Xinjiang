@@ -1,0 +1,1100 @@
+{
+  "trip": {
+    "id": "xinjiang-northern-lakes-winter-2026",
+    "title": "北疆雙湖・冬季八日",
+    "subtitle": "11/27–12/04｜曠野長明・跟團旅行",
+    "startDate": "2026-11-27",
+    "endDate": "2026-12-04",
+    "timezone": "Asia/Shanghai",
+    "updatedAt": "2026-11-19T19:40:00+08:00",
+    "revision": "xinjiang-2026-11-19-01",
+    "homeLabel": "新疆・中國",
+    "center": {
+      "lat": 43.78,
+      "lng": 87.6
+    },
+    "accent": "#285375",
+    "themeColor": "#0b1020",
+    "publication": {
+      "state": "draft",
+      "humanGate": "not-run"
+    }
+  },
+  "ui": {
+    "defaultView": "trip",
+    "theme": "system",
+    "visualStyle": "editorial",
+    "locale": "zh-TW",
+    "bottomNav": [
+      "now",
+      "trip",
+      "map",
+      "places",
+      "more"
+    ]
+  },
+  "providers": {
+    "mapStyle": "https://tiles.openfreemap.org/styles/liberty",
+    "mapStyleLight": "https://tiles.openfreemap.org/styles/liberty",
+    "mapStyleDark": "https://tiles.openfreemap.org/styles/dark",
+    "weatherEndpoint": "https://api.open-meteo.com/v1/forecast",
+    "googleMapsEmbedKey": ""
+  },
+  "highlights": [
+    {
+      "id": "departure-t2",
+      "dateLabel": "11/27",
+      "title": "12:00 桃園 T2 集合",
+      "status": "confirmed",
+      "note": "東方航空團體櫃檯前；護照與台胞證都要攜帶。"
+    },
+    {
+      "id": "he-mu-photo",
+      "dateLabel": "11/29",
+      "title": "禾木美麗峰旅拍",
+      "status": "included",
+      "note": "基礎妝造＋9 張精修照；建議搭配亮色圍巾。"
+    },
+    {
+      "id": "optional-ski",
+      "dateLabel": "11/28–11/29",
+      "title": "將軍山夜滑／吉克普林",
+      "status": "optional",
+      "note": "雪票自理；雪場營運、入場與回程安排仍需當日確認。"
+    },
+    {
+      "id": "lake-ice",
+      "dateLabel": "12/02",
+      "title": "賽里木湖環湖",
+      "status": "planned",
+      "note": "VIP 專車環湖與航拍短影音；藍冰、冰泡、冰推視結冰與天氣，非保證。"
+    }
+  ],
+  "days": [
+    {
+      "id": "d1",
+      "date": "2026-11-27",
+      "label": "DAY 1",
+      "title": "桃園出發・上海轉機・抵達烏魯木齊",
+      "routeLabel": "桃園 T2 → 上海浦東 T1 → 烏魯木齊",
+      "routeSummary": [
+        "桃園 T2",
+        "上海浦東 T1",
+        "烏魯木齊"
+      ],
+      "reminders": [
+        "12:00 桃園機場 T2 東方航空團體櫃檯前集合。",
+        "上海浦東 T1 轉機須持台胞證通關與再次安檢；托運行李依團方公告直掛烏魯木齊。",
+        "FM9223 預計 11/28 凌晨 00:40 抵達；不要將其誤判為 11/27 晚上。"
+      ],
+      "items": [
+        {
+          "id": "d1-assembly",
+          "type": "event",
+          "start": "12:00",
+          "title": "團體集合｜桃園機場第二航廈",
+          "location": "桃園國際機場 T2・東方航空團體櫃檯前",
+          "note": "攜帶台灣護照及有效台胞證正本，領隊協助辦理登機與行李直掛。"
+        },
+        {
+          "id": "d1-mu5008",
+          "type": "transport",
+          "transportMode": "flight",
+          "title": "MU5008｜桃園國際機場 → 上海浦東國際機場",
+          "start": "15:00",
+          "end": "17:05",
+          "from": "桃園國際機場",
+          "to": "上海浦東國際機場",
+          "location": "桃園國際機場 → 上海浦東國際機場",
+          "flight": {
+            "number": "MU5008",
+            "airline": "中國東方航空",
+            "origin": {
+              "code": "TPE",
+              "terminal": "T2"
+            },
+            "destination": {
+              "code": "PVG",
+              "terminal": "T1"
+            },
+            "arrivalTimezone": "Asia/Shanghai"
+          },
+          "note": "航空公司提供的預定航班；起降時間及航廈以實際航班通知為準。",
+          "journeyId": "d1-mu5008"
+        },
+        {
+          "id": "d1-pvg-transfer",
+          "type": "break",
+          "title": "上海浦東 T1 轉機、通關與安檢",
+          "start": "TBD",
+          "location": "上海浦東國際機場 T1",
+          "note": "手冊排定轉機約 1 小時 55 分；人員需持台胞證辦理通關與安檢，行李直掛目的地。"
+        },
+        {
+          "id": "d1-fm9223",
+          "type": "transport",
+          "transportMode": "flight",
+          "title": "FM9223｜上海浦東國際機場 → 烏魯木齊天山國際機場",
+          "start": "19:00",
+          "end": "00:40",
+          "from": "上海浦東國際機場",
+          "to": "烏魯木齊天山國際機場",
+          "location": "上海浦東國際機場 → 烏魯木齊天山國際機場",
+          "flight": {
+            "number": "FM9223",
+            "airline": "上海航空",
+            "origin": {
+              "code": "PVG",
+              "terminal": "T1"
+            },
+            "destination": {
+              "code": "URC"
+            },
+            "arrivalTimezone": "Asia/Shanghai"
+          },
+          "note": "航空公司提供的預定航班；起降時間及航廈以實際航班通知為準。預定 11/28（翌日）00:40 抵達；手冊註記此航段無供餐。",
+          "endDate": "2026-11-28",
+          "journeyId": "d1-fm9223"
+        },
+        {
+          "id": "d1-airport-to-hotel",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜烏魯木齊天山國際機場 → 烏魯木齊市區飯店",
+          "start": "TBD",
+          "from": "烏魯木齊天山國際機場",
+          "to": "烏魯木齊市區飯店",
+          "location": "烏魯木齊天山國際機場 → 烏魯木齊市區飯店",
+          "note": "翌日凌晨抵達後由旅行團專車接機，車程及抵達飯店時刻待通知。"
+        },
+        {
+          "id": "d1-hotel",
+          "type": "stay",
+          "title": "住宿｜亞欣國際酒店（或同級）",
+          "start": "TBD",
+          "location": "烏魯木齊市・亞欣國際酒店",
+          "note": "手冊參考住宿，可能調整為同級飯店；實際飯店與入住時間以旅行社確認為準。"
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "date": "2026-11-28",
+      "label": "DAY 2",
+      "title": "S21 沙漠公路・阿勒泰將軍山",
+      "routeLabel": "烏魯木齊 → S21 沙漠高速 → 阿勒泰 → 將軍山",
+      "routeSummary": [
+        "烏魯木齊",
+        "S21 沙漠高速",
+        "阿勒泰",
+        "將軍山"
+      ],
+      "weatherLocation": {
+        "label": "阿勒泰市",
+        "lat": 47.85,
+        "lng": 88.13
+      },
+      "reminders": [
+        "手冊以約 550 公里／8 小時描述本日車程，為參考估算，不代表正式出發時間。",
+        "將軍山夜滑為自費選擇；須自行安排回程，並確認雪場當日營業。",
+        "早餐飯店提供；午晚餐自理。"
+      ],
+      "items": [
+        {
+          "id": "d2-drive-to-altay",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜烏魯木齊 → 阿勒泰",
+          "start": "TBD",
+          "from": "烏魯木齊",
+          "to": "阿勒泰",
+          "location": "烏魯木齊 → 阿勒泰",
+          "note": "沿 S21 沙漠高速穿越古爾班通古特沙漠；手冊參考車程約 550 公里／8 小時，實際取決於冬季路況。"
+        },
+        {
+          "id": "d2-junjianshan",
+          "type": "place",
+          "title": "阿勒泰將軍山國際滑雪度假區",
+          "start": "TBD",
+          "location": "新疆阿勒泰市・將軍山",
+          "infoCard": {
+            "summary": "靠近阿勒泰市區的冬季滑雪場，雪道、纜車與山頂夕陽景觀是主要特色；實際開放區域與營運時間需當日確認。",
+            "sourceLinks": [
+              {
+                "label": "新疆維吾爾自治區人民政府－將軍山報導",
+                "url": "https://www.xinjiang.gov.cn/xinjiang/dzdt/202303/d2a6e4472d374cfab7d75b9efffaf6e2.shtml"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2-sunset-cable",
+          "type": "event",
+          "title": "將軍山落日纜車・日落觀景",
+          "start": "TBD",
+          "location": "阿勒泰將軍山滑雪度假區",
+          "note": "依天氣與纜車營運安排，手冊列為團體特色體驗；山頂觀賞落日與藍調時刻。"
+        },
+        {
+          "id": "d2-night-ski",
+          "type": "event",
+          "title": "將軍山星空夜滑（自選／雪票自理）",
+          "start": "TBD",
+          "location": "阿勒泰將軍山滑雪度假區",
+          "note": "自費且非必參加；須確認是否開放、雪票、裝備及自行返程。"
+        },
+        {
+          "id": "d2-hotel",
+          "type": "stay",
+          "title": "住宿｜鼎洲酒店（或同級）",
+          "start": "TBD",
+          "location": "新疆阿勒泰市・鼎洲酒店",
+          "note": "手冊參考住宿，可能調整為同級飯店；實際飯店與入住時間以旅行社確認為準。"
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "date": "2026-11-29",
+      "label": "DAY 3",
+      "title": "禾木美麗峰旅拍・雪村夜色",
+      "routeLabel": "阿勒泰 → 禾木村 → 美麗峰",
+      "routeSummary": [
+        "阿勒泰",
+        "禾木村",
+        "美麗峰"
+      ],
+      "weatherLocation": {
+        "label": "禾木村",
+        "lat": 48.56921,
+        "lng": 87.43037
+      },
+      "reminders": [
+        "阿勒泰前往禾木手冊估計約 220 公里／5 小時，無確定上車時刻。",
+        "旅拍已含基礎妝造與 9 張精修；可備亮色圍巾。",
+        "吉克普林滑雪雪票自理且開放、滑雪時段未確認；篝火活動也視景區安排。",
+        "早餐飯店提供；午晚餐自理。"
+      ],
+      "items": [
+        {
+          "id": "d3-drive-to-hemu",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜阿勒泰 → 禾木村",
+          "start": "TBD",
+          "from": "阿勒泰",
+          "to": "禾木村",
+          "location": "阿勒泰 → 禾木村",
+          "note": "手冊參考約 220 公里／5 小時；冰雪交通與行程排序以嚮導安排為準。"
+        },
+        {
+          "id": "d3-hemu-village",
+          "type": "place",
+          "title": "禾木村・圖瓦雪景木屋",
+          "start": "TBD",
+          "location": "新疆阿勒泰地區布爾津縣・禾木",
+          "infoCard": {
+            "summary": "阿爾泰山區的木屋聚落，以雪季白樺林、圖瓦村落與河谷晨昏景色聞名；這裡是當日雪地旅拍與晚間活動的主要區域。",
+            "sourceLinks": [
+              {
+                "label": "新疆生產建設兵團－禾木與喀納斯介紹",
+                "url": "https://www.xjbt.gov.cn/c/2025-09-16/8443116.shtml"
+              }
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hemu_Village_in_the_snow.jpg?width=900",
+            "imageAlt": "新疆禾木村冬季白雪覆蓋的木屋與山景",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:Hemu_Village_in_the_snow.jpg",
+            "imageCredit": "Leeinm / Wikimedia Commons",
+            "imageLicense": "CC BY-SA 4.0"
+          }
+        },
+        {
+          "id": "d3-meilifeng-photos",
+          "type": "event",
+          "title": "美麗峰雪地旅拍（含妝造＋9 張精修）",
+          "start": "TBD",
+          "location": "禾木・美麗峰",
+          "note": "團費已含特色旅拍、基礎妝造與 9 張精修照片；實際集合點及拍攝時刻待團方通知。"
+        },
+        {
+          "id": "d3-jikepulin-ski",
+          "type": "event",
+          "title": "吉克普林滑雪（自選／雪票自理）",
+          "start": "TBD",
+          "location": "禾木・吉克普林國際滑雪度假區",
+          "note": "非必選；依雪場當日開放、雪票、車輛與團體行程時間決定，請先在群組提出意願。"
+        },
+        {
+          "id": "d3-campfire",
+          "type": "event",
+          "title": "禾木篝火晚會（視景區開放）",
+          "start": "TBD",
+          "location": "禾木村",
+          "note": "由團員自行前往；若未開放則不成立。"
+        },
+        {
+          "id": "d3-stars",
+          "type": "event",
+          "title": "禾木夜間觀星（天候允許）",
+          "start": "TBD",
+          "location": "禾木村",
+          "note": "清晰天空與保暖條件允許時欣賞星空；不保證能看到銀河。"
+        },
+        {
+          "id": "d3-hotel",
+          "type": "stay",
+          "title": "住宿｜軒園山居雪景木屋（或同級）",
+          "start": "TBD",
+          "location": "新疆禾木・軒園山居",
+          "note": "手冊列禾木木屋住宿；翌日 11/30 木屋不含早餐。"
+        }
+      ]
+    },
+    {
+      "id": "d4",
+      "date": "2026-11-30",
+      "label": "DAY 4",
+      "title": "禾木晨曦・喀納斯三灣・布爾津",
+      "routeLabel": "禾木 → 喀納斯三灣 → 喀納斯湖 → 布爾津",
+      "routeSummary": [
+        "禾木",
+        "喀納斯三灣",
+        "喀納斯湖",
+        "布爾津"
+      ],
+      "weatherLocation": {
+        "label": "喀納斯湖",
+        "lat": 48.7108,
+        "lng": 87.0234
+      },
+      "reminders": [
+        "禾木木屋不含早餐；本日早餐需自理。",
+        "冬季前往喀納斯手冊提及約 5.5 小時車程，為參考數字。",
+        "潑水成冰僅配合嚮導安全指示，避免燙傷與冰面滑倒；午晚餐自理。"
+      ],
+      "items": [
+        {
+          "id": "d4-hemu-sunrise",
+          "type": "event",
+          "title": "禾木晨曦日出・木屋雪景",
+          "start": "TBD",
+          "location": "禾木村",
+          "note": "清晨雪谷與木屋炊煙攝影，實際日出、天候待當日確認。"
+        },
+        {
+          "id": "d4-ice-photo",
+          "type": "event",
+          "title": "雪地潑水成冰攝影體驗（視安全安排）",
+          "start": "TBD",
+          "location": "禾木村",
+          "note": "需由嚮導確認低溫及安全條件；不自行向人或危險方向潑熱水。"
+        },
+        {
+          "id": "d4-drive-to-kanas",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜禾木村 → 喀納斯景區",
+          "start": "TBD",
+          "from": "禾木村",
+          "to": "喀納斯景區",
+          "location": "禾木村 → 喀納斯景區",
+          "note": "手冊提及本日前往喀納斯約 5.5 小時參考車程，實際路線依管制與冰雪狀況。"
+        },
+        {
+          "id": "d4-fairy-bay",
+          "type": "place",
+          "title": "喀納斯・神仙灣",
+          "start": "TBD",
+          "location": "新疆喀納斯景區・神仙灣",
+          "infoCard": {
+            "summary": "喀納斯河段中較寬、流速平緩的河灣，常見低空水氣與輕霧，冬季林海與河谷可呈現水墨般景致。",
+            "sourceLinks": [
+              {
+                "label": "新疆自然資源廳－喀納斯地質公園",
+                "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/kpjd/202010/22b9bef9e4fc47638e7eac92c2936e47.shtml"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4-moon-bay",
+          "type": "place",
+          "title": "喀納斯・月亮灣",
+          "start": "TBD",
+          "location": "新疆喀納斯景區・月亮灣",
+          "infoCard": {
+            "summary": "喀納斯河在此蜿蜒成彎月形的河道，是三灣中最容易辨認的河曲；冬天可欣賞雪覆林坡與結冰河灣。",
+            "sourceLinks": [
+              {
+                "label": "新疆自然資源廳－喀納斯地質公園",
+                "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/kpjd/202010/22b9bef9e4fc47638e7eac92c2936e47.shtml"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4-dragon-bay",
+          "type": "place",
+          "title": "喀納斯・臥龍灣",
+          "start": "TBD",
+          "location": "新疆喀納斯景區・臥龍灣",
+          "infoCard": {
+            "summary": "因河灣中的河心洲外形似臥龍而得名，景觀由河流、堆積地形與冰川谷地共同塑造。",
+            "sourceLinks": [
+              {
+                "label": "新疆自然資源廳－喀納斯地質公園",
+                "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/kpjd/202010/22b9bef9e4fc47638e7eac92c2936e47.shtml"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4-kanas-lake",
+          "type": "place",
+          "title": "喀納斯湖・冬季雪景",
+          "start": "TBD",
+          "location": "新疆阿勒泰地區布爾津縣・喀納斯湖",
+          "infoCard": {
+            "summary": "喀納斯國家地質公園核心湖區，位在阿爾泰山森林與雪山之間；冬季可觀賞霧凇、冰雪與湖岸景色，實際結冰狀況依天候。",
+            "sourceLinks": [
+              {
+                "label": "新疆自然資源廳－喀納斯地質公園",
+                "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/kpjd/202010/22b9bef9e4fc47638e7eac92c2936e47.shtml"
+              }
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Kanas_Lake_Winter.jpg?width=900",
+            "imageAlt": "冬季的喀納斯湖與周圍雪山",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:Kanas_Lake_Winter.jpg",
+            "imageCredit": "Pazakui / Wikimedia Commons",
+            "imageLicense": "CC BY 4.0"
+          }
+        },
+        {
+          "id": "d4-drive-to-burqin",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜喀納斯 → 布爾津",
+          "start": "TBD",
+          "from": "喀納斯",
+          "to": "布爾津",
+          "location": "喀納斯 → 布爾津",
+          "note": "按團體行程從景區往布爾津住宿；未提供確定發車與抵達時刻。"
+        },
+        {
+          "id": "d4-red-bridge",
+          "type": "event",
+          "title": "布爾津紅橋夜景拍照",
+          "start": "TBD",
+          "location": "新疆布爾津・紅橋",
+          "note": "手冊列為城市夜景打卡停靠點，非獨立深度景點參觀；是否停留以當日行程為準。"
+        },
+        {
+          "id": "d4-hotel",
+          "type": "stay",
+          "title": "住宿｜環疆酒店（或同級）",
+          "start": "TBD",
+          "location": "新疆布爾津・環疆酒店",
+          "note": "手冊參考住宿，可能調整為同級飯店；實際飯店與入住時間以旅行社確認為準。"
+        }
+      ]
+    },
+    {
+      "id": "d5",
+      "date": "2026-12-01",
+      "label": "DAY 5",
+      "title": "烏爾禾世界魔鬼城・抵達奎屯",
+      "routeLabel": "布爾津 → 烏爾禾世界魔鬼城 → 奎屯",
+      "routeSummary": [
+        "布爾津",
+        "烏爾禾世界魔鬼城",
+        "奎屯"
+      ],
+      "weatherLocation": {
+        "label": "奎屯市",
+        "lat": 44.42,
+        "lng": 84.9
+      },
+      "reminders": [
+        "手冊約 450 公里／7 小時為本日車程參考，非固定交通班次。",
+        "魔鬼城如遇冰雪道路或景區限制，聽從領隊公告；早餐飯店提供、午晚餐自理。"
+      ],
+      "items": [
+        {
+          "id": "d5-drive-to-urho",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜布爾津 → 烏爾禾世界魔鬼城",
+          "start": "TBD",
+          "from": "布爾津",
+          "to": "烏爾禾世界魔鬼城",
+          "location": "布爾津 → 烏爾禾世界魔鬼城",
+          "note": "沿北疆道路南行，手冊記載本日車程參考約 450 公里／7 小時（含後續抵達奎屯路段，非此段單獨時間）。"
+        },
+        {
+          "id": "d5-ghost-city",
+          "type": "place",
+          "title": "烏爾禾世界魔鬼城",
+          "start": "TBD",
+          "location": "新疆克拉瑪依市烏爾禾區・世界魔鬼城",
+          "infoCard": {
+            "summary": "準噶爾盆地西緣的雅丹地貌景觀，岩層經長期風蝕形成城堡般的地形；冬季積雪與紅色土丘形成強烈對比。",
+            "sourceLinks": [
+              {
+                "label": "烏爾禾區人民政府－旅遊介紹",
+                "url": "https://www.weh.gov.cn/weh/ly1/202505/36181c14f6d44d87914615d7f6ffa853.shtml"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d5-drive-to-kuitun",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜烏爾禾世界魔鬼城 → 奎屯市",
+          "start": "TBD",
+          "from": "烏爾禾世界魔鬼城",
+          "to": "奎屯市",
+          "location": "烏爾禾世界魔鬼城 → 奎屯市",
+          "note": "遊覽後續往奎屯，實際發車及抵達時間待團體公告。"
+        },
+        {
+          "id": "d5-hotel",
+          "type": "stay",
+          "title": "住宿｜萬達美華酒店（或同級）",
+          "start": "TBD",
+          "location": "新疆奎屯市・萬達美華酒店",
+          "note": "手冊參考住宿，可能調整為同級飯店；實際飯店與入住時間以旅行社確認為準。"
+        }
+      ]
+    },
+    {
+      "id": "d6",
+      "date": "2026-12-02",
+      "label": "DAY 6",
+      "title": "賽里木湖 VIP 環湖・季節冰景",
+      "routeLabel": "奎屯 → 賽里木湖 → VIP 環湖",
+      "routeSummary": [
+        "奎屯",
+        "賽里木湖",
+        "VIP 環湖"
+      ],
+      "weatherLocation": {
+        "label": "賽里木湖",
+        "lat": 44.6,
+        "lng": 81.1167
+      },
+      "reminders": [
+        "手冊參考奎屯至賽里木湖約 400 公里／6 小時，無確定出發時間。",
+        "12 月 2 日可能尚未形成完整藍冰或冰泡；未經景區確認絕不走上湖面。",
+        "VIP 包車環湖及每人 1 條坦克跟車航拍短影音列為團費包含。",
+        "早餐飯店提供；午晚餐自理。"
+      ],
+      "items": [
+        {
+          "id": "d6-drive-to-sayram",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜奎屯 → 賽里木湖景區",
+          "start": "TBD",
+          "from": "奎屯",
+          "to": "賽里木湖景區",
+          "location": "奎屯 → 賽里木湖景區",
+          "note": "手冊參考約 400 公里／6 小時；冰雪路況與實際抵達時間依嚮導安排。"
+        },
+        {
+          "id": "d6-sayram-lake",
+          "type": "place",
+          "title": "賽里木湖",
+          "start": "TBD",
+          "location": "新疆博爾塔拉蒙古自治州・賽里木湖",
+          "infoCard": {
+            "summary": "位在天山山脈的高山湖泊，冬季適合從環湖公路觀賞雪山、湖岸與湖面變化。完整藍冰、冰泡通常需要更成熟的結冰條件，12 月上旬不保證可見。",
+            "sourceLinks": [
+              {
+                "label": "新疆維吾爾自治區人民政府－賽里木湖",
+                "url": "https://www.xinjiang.gov.cn/xinjiang/xwfb/202408/ff0d4bc27fef4e13b9b4720676a07559.shtml"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d6-vip-loop",
+          "type": "event",
+          "title": "賽里木湖 VIP 專車環湖",
+          "start": "TBD",
+          "location": "賽里木湖景區",
+          "note": "手冊列專車進入景區環湖公路、可依條件停車攝影；冬季道路與區域開放以現場為準。"
+        },
+        {
+          "id": "d6-seasonal-ice",
+          "type": "event",
+          "title": "藍冰、冰泡、冰推觀賞（視當年冰況）",
+          "start": "TBD",
+          "location": "賽里木湖",
+          "note": "這些是手冊列出的預期景觀，並非保證；通常完整藍冰較晚形成，未開放的冰面不得踏入。"
+        },
+        {
+          "id": "d6-drone-video",
+          "type": "event",
+          "title": "坦克跟車航拍短影音",
+          "start": "TBD",
+          "location": "賽里木湖環湖公路",
+          "note": "團費特色包含：每人 1 條，由隨隊攝影師拍攝後發送；依天氣、飛行規定與現場安排。"
+        },
+        {
+          "id": "d6-hotel",
+          "type": "stay",
+          "title": "住宿｜FF 設計師酒店（或同級）",
+          "start": "TBD",
+          "location": "賽里木湖景區門口・FF 設計師酒店",
+          "note": "手冊參考住宿，可能調整為同級飯店；實際飯店與入住時間以旅行社確認為準。"
+        }
+      ]
+    },
+    {
+      "id": "d7",
+      "date": "2026-12-03",
+      "label": "DAY 7",
+      "title": "獨山子大峽谷・新疆國際大巴扎",
+      "routeLabel": "賽里木湖 → 獨山子大峽谷 → 烏魯木齊 → 國際大巴扎",
+      "routeSummary": [
+        "賽里木湖",
+        "獨山子大峽谷",
+        "烏魯木齊",
+        "國際大巴扎"
+      ],
+      "weatherLocation": {
+        "label": "烏魯木齊市",
+        "lat": 43.78,
+        "lng": 87.6
+      },
+      "reminders": [
+        "手冊參考本日行車約 560 公里／8 小時，實際到達大巴扎時刻不明。",
+        "住宿參考為近大巴扎的橄欖苑酒店或同級；早餐飯店提供、午晚餐自理。"
+      ],
+      "items": [
+        {
+          "id": "d7-sayram-morning",
+          "type": "event",
+          "title": "賽里木湖晨景（天氣允許）",
+          "start": "TBD",
+          "location": "賽里木湖",
+          "note": "清晨湖景依可用時間與天候進行。"
+        },
+        {
+          "id": "d7-drive-to-canyon",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜賽里木湖 → 獨山子大峽谷",
+          "start": "TBD",
+          "from": "賽里木湖",
+          "to": "獨山子大峽谷",
+          "location": "賽里木湖 → 獨山子大峽谷",
+          "note": "沿天山北坡東行；手冊參考本日總車程約 560 公里／8 小時，非本路段單獨時數。"
+        },
+        {
+          "id": "d7-dushanzi-canyon",
+          "type": "place",
+          "title": "獨山子大峽谷",
+          "start": "TBD",
+          "location": "新疆克拉瑪依市獨山子區・獨山子大峽谷",
+          "infoCard": {
+            "summary": "位於天山北麓的巨大沖蝕峽谷，峽壁溝槽與層理呈現深刻紋理；冬季可見峽谷與雪地對比。",
+            "sourceLinks": [
+              {
+                "label": "克拉瑪依市人民政府－獨山子大峽谷",
+                "url": "https://www.klmy.gov.cn/klmys/ggwhfw/202609/1b6e661aa5db40658097a6d29f68ba6c.shtml"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7-drive-to-urumqi",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜獨山子大峽谷 → 烏魯木齊",
+          "start": "TBD",
+          "from": "獨山子大峽谷",
+          "to": "烏魯木齊",
+          "location": "獨山子大峽谷 → 烏魯木齊",
+          "note": "沿途可遠眺天山山脈，續往市區；實際到市區及市場時間待通知。"
+        },
+        {
+          "id": "d7-international-bazaar",
+          "type": "place",
+          "title": "新疆國際大巴扎",
+          "start": "TBD",
+          "location": "新疆烏魯木齊市・國際大巴扎",
+          "infoCard": {
+            "summary": "烏魯木齊代表性的市集與特色建築群，能購買新疆紅棗、葡萄乾、核桃等伴手禮；購物時間依本日抵達時刻。",
+            "sourceLinks": [
+              {
+                "label": "烏魯木齊天山區人民政府－國際大巴扎",
+                "url": "https://www.xjtsq.gov.cn/info/4388/160221.htm"
+              }
+            ],
+            "image": "https://commons.wikimedia.org/wiki/Special:FilePath/20231218_Xinjiang_International_Grand_Bazaar_02.jpg?width=900",
+            "imageAlt": "新疆國際大巴扎具有地域風格的建築與廣場",
+            "imageSource": "https://commons.wikimedia.org/wiki/File:20231218_Xinjiang_International_Grand_Bazaar_02.jpg",
+            "imageCredit": "Windmemories / Wikimedia Commons",
+            "imageLicense": "CC BY-SA 4.0"
+          }
+        },
+        {
+          "id": "d7-hotel",
+          "type": "stay",
+          "title": "住宿｜橄欖苑酒店（或同級）",
+          "start": "TBD",
+          "location": "烏魯木齊・近國際大巴扎・橄欖苑酒店",
+          "note": "手冊參考住宿，可能調整為同級飯店；實際飯店與入住時間以旅行社確認為準。"
+        }
+      ]
+    },
+    {
+      "id": "d8",
+      "date": "2026-12-04",
+      "label": "DAY 8",
+      "title": "烏魯木齊回程・上海轉機・桃園",
+      "routeLabel": "烏魯木齊 → 上海浦東 T1 → 桃園 T2",
+      "routeSummary": [
+        "烏魯木齊",
+        "上海浦東 T1",
+        "桃園 T2"
+      ],
+      "weatherLocation": {
+        "label": "烏魯木齊市",
+        "lat": 43.78,
+        "lng": 87.6
+      },
+      "reminders": [
+        "FM9222 於 09:05 起飛；飯店前往機場時間請以團體公告為準。",
+        "上海浦東 T1 轉機 2 小時 05 分；行李依公告直掛桃園，人員需完成安檢與通關。",
+        "早餐可能為飯店早餐或打包；午晚餐自理。"
+      ],
+      "items": [
+        {
+          "id": "d8-hotel-to-airport",
+          "type": "transport",
+          "transportMode": "drive",
+          "title": "專車｜烏魯木齊市區飯店 → 烏魯木齊天山國際機場",
+          "start": "TBD",
+          "from": "烏魯木齊市區飯店",
+          "to": "烏魯木齊天山國際機場",
+          "location": "烏魯木齊市區飯店 → 烏魯木齊天山國際機場",
+          "note": "清晨專車送機，集合／發車時刻待領隊通知；請提早確認證件與託運。"
+        },
+        {
+          "id": "d8-fm9222",
+          "type": "transport",
+          "transportMode": "flight",
+          "title": "FM9222｜烏魯木齊天山國際機場 → 上海浦東國際機場",
+          "start": "09:05",
+          "end": "13:40",
+          "from": "烏魯木齊天山國際機場",
+          "to": "上海浦東國際機場",
+          "location": "烏魯木齊天山國際機場 → 上海浦東國際機場",
+          "flight": {
+            "number": "FM9222",
+            "airline": "上海航空",
+            "origin": {
+              "code": "URC"
+            },
+            "destination": {
+              "code": "PVG",
+              "terminal": "T1"
+            },
+            "arrivalTimezone": "Asia/Shanghai"
+          },
+          "note": "航空公司提供的預定航班；起降時間及航廈以實際航班通知為準。手冊註記本航段無供餐。",
+          "journeyId": "d8-fm9222"
+        },
+        {
+          "id": "d8-pvg-transfer",
+          "type": "break",
+          "title": "上海浦東 T1 轉機、通關與安檢",
+          "start": "TBD",
+          "location": "上海浦東國際機場 T1",
+          "note": "預定轉機約 2 小時 05 分；行李依團方公告直掛桃園，需持台胞證與護照。"
+        },
+        {
+          "id": "d8-mu5005",
+          "type": "transport",
+          "transportMode": "flight",
+          "title": "MU5005｜上海浦東國際機場 → 台灣桃園國際機場",
+          "start": "15:45",
+          "end": "17:40",
+          "from": "上海浦東國際機場",
+          "to": "台灣桃園國際機場",
+          "location": "上海浦東國際機場 → 台灣桃園國際機場",
+          "flight": {
+            "number": "MU5005",
+            "airline": "中國東方航空",
+            "origin": {
+              "code": "PVG",
+              "terminal": "T1"
+            },
+            "destination": {
+              "code": "TPE",
+              "terminal": "T2"
+            },
+            "arrivalTimezone": "Asia/Shanghai"
+          },
+          "note": "航空公司提供的預定航班；起降時間及航廈以實際航班通知為準。",
+          "journeyId": "d8-mu5005"
+        },
+        {
+          "id": "d8-arrival-tpe",
+          "type": "event",
+          "title": "返抵桃園機場第二航廈",
+          "start": "TBD",
+          "location": "桃園國際機場 T2",
+          "note": "預定落地 17:40；實際入境、領行李與離開時間待現場安排。"
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "id": "t-passport",
+      "label": "確認護照與台胞證正本有效、放隨身袋",
+      "dueDate": "2026-11-26",
+      "priority": "high"
+    },
+    {
+      "id": "t-payment",
+      "label": "完成支付寶／微信支付實名認證與信用卡綁定",
+      "dueDate": "2026-11-26",
+      "priority": "high"
+    },
+    {
+      "id": "t-ccc",
+      "label": "確認行動電源清楚 CCC 標示與額定 Wh，不託運",
+      "dueDate": "2026-11-26",
+      "priority": "high"
+    },
+    {
+      "id": "t-internet",
+      "label": "開通可在中國使用的漫遊／網卡及通訊方案",
+      "dueDate": "2026-11-26",
+      "priority": "high"
+    },
+    {
+      "id": "t-check-guide",
+      "label": "與領隊確認滑雪意願、住宿及當日集合車程",
+      "dueDate": "2026-11-26",
+      "priority": "normal"
+    },
+    {
+      "id": "t-meet",
+      "label": "11/27 12:00 抵桃園 T2 東方航空團體櫃檯",
+      "dueDate": "2026-11-27",
+      "priority": "high"
+    }
+  ],
+  "checklists": [
+    {
+      "id": "documents",
+      "title": "證件與支付",
+      "items": [
+        {
+          "id": "passport",
+          "label": "中華民國護照正本（有效）"
+        },
+        {
+          "id": "taiwan-permit",
+          "label": "台胞證正本（有效，隨身攜帶）"
+        },
+        {
+          "id": "alipay",
+          "label": "支付寶或微信支付已完成實名認證／綁卡"
+        },
+        {
+          "id": "cash-rmb",
+          "label": "備妥人民幣現金 1,000–1,500 元（導遊建議）"
+        },
+        {
+          "id": "mobile-data",
+          "label": "中國可用的漫遊／網卡與聯絡方式"
+        }
+      ]
+    },
+    {
+      "id": "cold-clothing",
+      "title": "極寒防寒（約 -10 至 -25°C）",
+      "items": [
+        {
+          "id": "base-layer",
+          "label": "排汗發熱內層（避免純棉）"
+        },
+        {
+          "id": "mid-layer",
+          "label": "刷毛／輕羽絨中層"
+        },
+        {
+          "id": "outer-layer",
+          "label": "防風、防水厚羽絨外套"
+        },
+        {
+          "id": "boots",
+          "label": "防水防滑高筒雪靴"
+        },
+        {
+          "id": "hat",
+          "label": "遮耳毛帽、圍巾／防風面罩"
+        },
+        {
+          "id": "gloves",
+          "label": "防水觸控保暖手套"
+        },
+        {
+          "id": "sunglasses",
+          "label": "墨鏡（雪地反光）"
+        },
+        {
+          "id": "heat-packs",
+          "label": "暖暖包與備用保暖襪"
+        }
+      ]
+    },
+    {
+      "id": "health",
+      "title": "保濕、藥品與長途車程",
+      "items": [
+        {
+          "id": "lip-balm",
+          "label": "護唇膏與保濕乳液"
+        },
+        {
+          "id": "medicines",
+          "label": "個人常備藥、腸胃藥、感冒藥、暈車藥"
+        },
+        {
+          "id": "travel-neck",
+          "label": "頸枕"
+        },
+        {
+          "id": "thermos",
+          "label": "保溫水瓶"
+        }
+      ]
+    },
+    {
+      "id": "electronics",
+      "title": "電子設備與旅拍",
+      "items": [
+        {
+          "id": "ccc-power-bank",
+          "label": "行動電源具清楚 CCC/3C 標示及容量，放隨身行李"
+        },
+        {
+          "id": "spare-battery",
+          "label": "備用鋰電池分開防短路、放隨身行李"
+        },
+        {
+          "id": "cameras",
+          "label": "相機／手機與充電器，低溫備用電池貼身保暖"
+        },
+        {
+          "id": "bright-scarf",
+          "label": "11/29 禾木旅拍可用亮色圍巾（選配）"
+        }
+      ]
+    }
+  ],
+  "essentials": [
+    {
+      "id": "airport-flight",
+      "category": "航班與證件",
+      "title": "上海浦東轉機與證件",
+      "body": "去程 MU5008 接 FM9223，回程 FM9222 接 MU5005；上海浦東機場均為 T1，行李依團方說明直掛終點，人員須持有效台胞證通關並再接受安檢；台灣護照也須隨身攜帶。航班、航廈與行李規定以航空公司現場公告為準。"
+    },
+    {
+      "id": "powerbank",
+      "category": "飛航安全",
+      "title": "行動電源與鋰電池",
+      "body": "行動電源、備用鋰電池不可託運；行動電源必須有清楚額定容量與 3C/CCC 標識，不能是公告召回型號。導遊要求單顆不超過 100Wh（約 27,000mAh 僅以 3.7V 標稱電壓估算）；實際以外殼 Wh 及航司規則為準。東航公告原則上每人最多攜 2 顆行動電源，飛行途中不可使用充電寶充電。",
+      "sourceLinks": [
+        {
+          "label": "中國民航局－3C 標誌管制",
+          "url": "https://www.caac.gov.cn/XWZX/MHYW/202506/t20250626_227805.html"
+        },
+        {
+          "label": "中國東方航空－鋰電池乘機規定",
+          "url": "https://global.ceair.com/global/static/Announcement/ScheduledGuidelines/boardingCheckin/safetyRules/"
+        }
+      ]
+    },
+    {
+      "id": "climate",
+      "category": "防寒與健康",
+      "title": "冬季極寒與乾燥",
+      "body": "行前手冊預估北疆約 -10～-25°C；內層排汗發熱、中層刷毛或輕羽絨、外層防風防水厚羽絨。需防滑雪靴、毛帽、手套、圍巾、墨鏡。室內暖氣乾燥，攜帶護唇膏、乳液和常備藥品；長途車程可備頸枕與保溫瓶。此為行前氣候參考，逐日氣溫另看網站天氣卡，不能當成實際預報。"
+    },
+    {
+      "id": "payments",
+      "category": "支付與網路",
+      "title": "中國行動支付與備用現金",
+      "body": "導遊建議在台灣完成支付寶或微信支付下載、實名認證與信用卡綁定；每人另備人民幣約 1,000～1,500 元現金，作為山區訊號不佳時的備用支付。提前啟用電信漫遊或適用的中國／香港網卡。"
+    },
+    {
+      "id": "meals",
+      "category": "餐食與住宿",
+      "title": "餐食包含範圍",
+      "body": "全團含 6 頓飯店早餐（11/28、11/29、12/01、12/02、12/03、12/04）；11/27 不供早餐，11/30 禾木木屋不含早餐。午、晚餐全程自理；12/04 早餐可能安排打包，依領隊確認。住宿為手冊參考酒店或同級，不表示已確認實際房型。"
+    },
+    {
+      "id": "snow-choices",
+      "category": "自選活動",
+      "title": "自費滑雪與冬季冰況",
+      "body": "11/28 將軍山星空夜滑、11/29 吉克普林滑雪皆屬自選，雪票自理，需依開放及團方時段安排。11/29 雪地旅拍含基礎妝造與 9 張精修照。賽里木湖環湖與航拍列為團體服務，但 12/02 藍冰、冰泡是否形成、道路可否開放不能保證；未經景區許可不得踏上冰面。",
+      "sourceLinks": [
+        {
+          "label": "賽里木湖－冬季藍冰時期與安全參考（非景區公告）",
+          "url": "https://www.slmh.com.cn/faq/faq-lanbing.html"
+        }
+      ]
+    },
+    {
+      "id": "time-zone",
+      "category": "時間",
+      "title": "時區與日照",
+      "body": "本次各地航班與團體行程採台灣／中國標準時間 UTC+8，沒有時差；但新疆日出／日落及在地生活作息較台灣晚，手冊參考日出約 09:30、日落約 18:30。不可將此當作每一天精確日出日落時刻。"
+    }
+  ],
+  "notes": [
+    {
+      "id": "source",
+      "title": "本網站的資料依據",
+      "body": "依 2026/11/19 收到的《曠野長明：北疆雙湖八天七晚冬季行前說明手冊》（共 5 頁）與導遊 11/27–12/04 行前補充公告建置。團隊尚未公布每日確切集合、出發、抵達時間；TBD 即待通知。"
+    },
+    {
+      "id": "hotel-status",
+      "title": "住宿為參考飯店",
+      "body": "7 晚飯店在手冊均註明「或同級」，僅作參考，不能當成訂房確認。公開行程不包含團員個資、訂位代碼與證件號碼。"
+    },
+    {
+      "id": "status-ski",
+      "title": "滑雪與冰景需二次確認",
+      "body": "吉克普林雪場是否開放、將軍山夜滑雪票／回程、禾木篝火活動與賽里木湖藍冰現況，都依領隊及景區當日資訊；本網站沒有即時查票或即時路況。"
+    },
+    {
+      "id": "new-info",
+      "title": "團體變更由領隊公告為準",
+      "body": "長途冬季道路可能受冰雪與交通管制影響。Travel Lite 是靜態參考工具，並不代表實際已搭乘、入園或確定開放。"
+    }
+  ],
+  "links": [
+    {
+      "label": "原始碼 / GitHub",
+      "url": "https://github.com/world4jason/2026-Xinjiang"
+    },
+    {
+      "label": "使用的 Travel Lite Template",
+      "url": "https://github.com/world4jason/Travel-lite-Template"
+    },
+    {
+      "label": "中國東方航空－官方網站",
+      "url": "https://global.ceair.com/"
+    }
+  ]
+}
