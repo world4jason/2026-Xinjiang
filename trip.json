@@ -223,9 +223,21 @@
               {
                 "label": "新疆維吾爾自治區人民政府－將軍山報導",
                 "url": "https://www.xinjiang.gov.cn/xinjiang/dzdt/202303/d2a6e4472d374cfab7d75b9efffaf6e2.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B0FFFPTZKE"
               }
             ]
-          }
+          },
+          "lat": 47.839271,
+          "lng": 88.161438,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B0FFFPTZKE"
+            }
+          ]
         },
         {
           "id": "d2-sunset-cable",
@@ -299,6 +311,10 @@
               {
                 "label": "新疆生產建設兵團－禾木與喀納斯介紹",
                 "url": "https://www.xjbt.gov.cn/c/2025-09-16/8443116.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B0FFHUZDVF"
               }
             ],
             "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hemu_Village_in_the_snow.jpg?width=900",
@@ -306,7 +322,15 @@
             "imageSource": "https://commons.wikimedia.org/wiki/File:Hemu_Village_in_the_snow.jpg",
             "imageCredit": "Leeinm / Wikimedia Commons",
             "imageLicense": "CC BY-SA 4.0"
-          }
+          },
+          "lat": 48.568644,
+          "lng": 87.433003,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B0FFHUZDVF"
+            }
+          ]
         },
         {
           "id": "d3-meilifeng-photos",
@@ -412,9 +436,21 @@
               {
                 "label": "新疆自然資源廳－喀納斯地質公園",
                 "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/kpjd/202010/22b9bef9e4fc47638e7eac92c2936e47.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B0FFLBPIDY"
               }
             ]
-          }
+          },
+          "lat": 48.658992,
+          "lng": 87.040845,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B0FFLBPIDY"
+            }
+          ]
         },
         {
           "id": "d4-moon-bay",
@@ -428,9 +464,21 @@
               {
                 "label": "新疆自然資源廳－喀納斯地質公園",
                 "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/kpjd/202010/22b9bef9e4fc47638e7eac92c2936e47.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B0FFLBPIOC"
               }
             ]
-          }
+          },
+          "lat": 48.640995,
+          "lng": 87.045764,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B0FFLBPIOC"
+            }
+          ]
         },
         {
           "id": "d4-dragon-bay",
@@ -444,9 +492,21 @@
               {
                 "label": "新疆自然資源廳－喀納斯地質公園",
                 "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/kpjd/202010/22b9bef9e4fc47638e7eac92c2936e47.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://gaode.com/place/B0FFLBPIQO"
               }
             ]
-          }
+          },
+          "lat": 48.621543,
+          "lng": 87.054179,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://gaode.com/place/B0FFLBPIQO"
+            }
+          ]
         },
         {
           "id": "d4-kanas-lake",
@@ -460,6 +520,10 @@
               {
                 "label": "新疆自然資源廳－喀納斯地質公園",
                 "url": "https://zrzyt.xinjiang.gov.cn/xjgtzy/kpjd/202010/22b9bef9e4fc47638e7eac92c2936e47.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B0FFLIE3KF"
               }
             ],
             "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Kanas_Lake_Winter.jpg?width=900",
@@ -467,7 +531,15 @@
             "imageSource": "https://commons.wikimedia.org/wiki/File:Kanas_Lake_Winter.jpg",
             "imageCredit": "Pazakui / Wikimedia Commons",
             "imageLicense": "CC BY 4.0"
-          }
+          },
+          "lat": 48.712438,
+          "lng": 87.025867,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B0FFLIE3KF"
+            }
+          ]
         },
         {
           "id": "d4-drive-to-burqin",
@@ -542,9 +614,21 @@
               {
                 "label": "烏爾禾區人民政府－旅遊介紹",
                 "url": "https://www.weh.gov.cn/weh/ly1/202505/36181c14f6d44d87914615d7f6ffa853.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B03DE0004L"
               }
             ]
-          }
+          },
+          "lat": 46.135149,
+          "lng": 85.733205,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B03DE0004L"
+            }
+          ]
         },
         {
           "id": "d5-drive-to-kuitun",
@@ -579,9 +663,9 @@
         "VIP 環湖"
       ],
       "weatherLocation": {
-        "label": "賽里木湖",
-        "lat": 44.6,
-        "lng": 81.1167
+        "lat": 44.617077,
+        "lng": 81.386542,
+        "label": "賽里木湖景區東側"
       },
       "reminders": [
         "手冊參考奎屯至賽里木湖約 400 公里／6 小時，無確定出發時間。",
@@ -613,9 +697,21 @@
               {
                 "label": "新疆維吾爾自治區人民政府－賽里木湖",
                 "url": "https://www.xinjiang.gov.cn/xinjiang/xwfb/202408/ff0d4bc27fef4e13b9b4720676a07559.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B038D0LN3D"
               }
             ]
-          }
+          },
+          "lat": 44.617077,
+          "lng": 81.386542,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B038D0LN3D"
+            }
+          ]
         },
         {
           "id": "d6-vip-loop",
@@ -704,9 +800,21 @@
               {
                 "label": "克拉瑪依市人民政府－獨山子大峽谷",
                 "url": "https://www.klmy.gov.cn/klmys/ggwhfw/202609/1b6e661aa5db40658097a6d29f68ba6c.shtml"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B0FFG2BGUQ"
               }
             ]
-          }
+          },
+          "lat": 44.149387,
+          "lng": 84.758415,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B0FFG2BGUQ"
+            }
+          ]
         },
         {
           "id": "d7-drive-to-urumqi",
@@ -731,6 +839,10 @@
               {
                 "label": "烏魯木齊天山區人民政府－國際大巴扎",
                 "url": "https://www.xjtsq.gov.cn/info/4388/160221.htm"
+              },
+              {
+                "label": "高德地圖－景點位置",
+                "url": "https://www.amap.com/place/B03DF05V5I"
               }
             ],
             "image": "https://commons.wikimedia.org/wiki/Special:FilePath/20231218_Xinjiang_International_Grand_Bazaar_02.jpg?width=900",
@@ -738,7 +850,15 @@
             "imageSource": "https://commons.wikimedia.org/wiki/File:20231218_Xinjiang_International_Grand_Bazaar_02.jpg",
             "imageCredit": "Windmemories / Wikimedia Commons",
             "imageLicense": "CC BY-SA 4.0"
-          }
+          },
+          "lat": 43.780006,
+          "lng": 87.617977,
+          "externalLinks": [
+            {
+              "label": "高德地圖／位置與導航",
+              "url": "https://www.amap.com/place/B03DF05V5I"
+            }
+          ]
         },
         {
           "id": "d7-hotel",
@@ -1059,6 +1179,18 @@
       "category": "時間",
       "title": "時區與日照",
       "body": "本次各地航班與團體行程採台灣／中國標準時間 UTC+8，沒有時差；但新疆日出／日落及在地生活作息較台灣晚，手冊參考日出約 09:30、日落約 18:30。不可將此當作每一天精確日出日落時刻。"
+    },
+    {
+      "id": "china-maps",
+      "category": "交通導航",
+      "title": "中國境內地圖與導航",
+      "body": "行程的交通 A→B 連結沿用 Travel Lite 模板的 Google Maps 參考路線；在中國境內請優先使用每個景點附上的高德地圖位置及導遊安排，不要把 Google Maps 的建議道路或預估時間當作團體車程。已驗證景點座標只代表景區或觀景點位置，未必是當日實際停車、集合或可進入入口。",
+      "sourceLinks": [
+        {
+          "label": "高德地圖",
+          "url": "https://www.amap.com/"
+        }
+      ]
     }
   ],
   "notes": [
