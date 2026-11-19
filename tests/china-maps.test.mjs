@@ -62,3 +62,45 @@ test("all ten curated places have attributed photos and Amap locator links",()=>
     assert.ok(item.externalLinks?.some(x=>x.url.startsWith("https://uri.amap.com/marker?")),item.id);
   }
 });
+
+test("source-backed Taoyuan T2 name overrides the mainland map only for Taiwan events",()=>{
+  const data=JSON.parse(readFileSync(new URL("../trip.json",import.meta.url),"utf8"));
+  const items=data.days.flatMap(day=>day.items);
+  const taiwan=["d1-assembly","d8-arrival-tpe"].map(id=>items.find(x=>x.id===id));
+  for(const item of taiwan){
+    assert.ok(item,id+" missing");
+    assert.match(item.location,/T2/);
+    assert.equal(item.mapProvider,"google");
+    assert.match(item.mapQuery,/Airport Terminal 2/);
+    assert.equal(item.lat,undefined,"do not invent an exact terminal coordinate");
+    assert.equal(item.lng,undefined,"do not invent an exact terminal coordinate");
+  }
+});
+test("Taiwan terminal named-search iframe and handoff use Google without an API key",()=>{
+  const js=readFileSync(new URL("../runtime-google.js",import.meta.url),"utf8");
+  const map={
+    isEnabled:()=>true,
+    openUrl:()=> "https://uri.amap.com/search?keyword=%E4%B8%8A%E6%B5%B7",
+    placeEmbedUrl:()=> "https://www.amap.com/ssr/embed/place?test=1",
+    searchUrl:()=> "https://uri.amap.com/search?test=1"
+  };
+  const env={
+    googleMapsOpenUrl:()=>"",googleMapsEmbedUrl:()=>"",
+    window:{TravelLiteChinaMaps:map},
+    state:{data:{providers:{googleMapsEmbedKey:""}}},
+    URLSearchParams,encodeURIComponent
+  };
+  runInNewContext(js,env);
+  const terminal={mapProvider:"google",mapQuery:"Taoyuan International Airport Terminal 2, Taoyuan, Taiwan"};
+  assert.match(env.googleMapsEmbedUrl(terminal),/^https:\/\/www\.google\.com\/maps\?q=.*&output=embed$/);
+  assert.match(env.googleMapsOpenUrl(terminal),/^https:\/\/www\.google\.com\/maps\/search\//);
+  const shanghai={location:"上海浦東國際機場 T1"};
+  assert.match(env.googleMapsOpenUrl(shanghai),/^https:\/\/uri\.amap\.com\/search/);
+  assert.equal(env.googleMapsEmbedUrl(shanghai),"https://www.amap.com/ssr/embed/place?test=1");
+});
+test("unlocated mainland transfer gets a compact named-location lookup, not a false pin",()=>{
+  const code=readFileSync(new URL("../runtime-features.js",import.meta.url),"utf8");
+  assert.match(code,/container\.classList\.add\("map-lookup-only"\)/);
+  assert.match(code,/selectedText\.includes\(areaLabel\)/);
+  assert.match(code,/Google 地圖 ·/);
+});

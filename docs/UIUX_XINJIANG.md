@@ -17,3 +17,8 @@
 - https://lbs.amap.com/api/uri-api/guide/embedded-map/single-location
 - https://lbs.amap.com/api/uri-api/guide/embedded-map/map-view
 - https://lbs.amap.com/api/uri-api/guide/embedded-map/embedded-route
+
+## 台灣境內（11/27 去程及 12/04 返抵）
+- 旅行手冊明確提供桃園國際機場 **T2 第二航廈**；這是可以搜尋的確定建築物地名，不必因缺經緯度就顯示「沒有確定位置」。
+- 只有 `d1-assembly` 和 `d8-arrival-tpe` 以 `mapProvider: google`、`mapQuery: Taoyuan International Airport Terminal 2, Taoyuan, Taiwan` 開啟台灣境內 Google Maps 的免金鑰地名查詢與 iframe；**未標記具體東方航空團體櫃檯**，仍須以領隊通知為準。
+- 中國境內其餘項目使用高德地圖。跨城市／跨國航段不得誤用整天的天氣座標顯示錯誤區域；不能嵌圖時顯示精簡地名搜尋，不再留下一大片空白地圖。

@@ -175,24 +175,42 @@
     if (!container) return;
     destroyMap();
 
-    // Xinjiang uses Amap's official key-free iframe rather than MapLibre tiles.
-    // An untimed or unlocated selected item never borrows another POI's pin.
+    // Taiwan terminals have a source-confirmed NAME (TPE T2) but no sourced
+    // WGS84 point. Google can resolve that exact named terminal on its own.
+    // Mainland items continue to use Amap. Do not geocode/pin a group counter.
     if (window.TravelLiteChinaMaps?.isEnabled?.()) {
       const amap = window.TravelLiteChinaMaps;
-      const point = itemCoordinates(selected) ? selected : null;
-      const area = day?.weatherLocation || null;
-      const embed = point ? amap.placeEmbedUrl(point) : amap.viewEmbedUrl(area);
+      const taiwan = selected?.mapProvider === "google" && !!selected?.mapQuery;
+      const point = !taiwan && itemCoordinates(selected) ? selected : null;
+      // A day's weather coordinate is not a map fallback for a stop in a
+      // different city/country (e.g. Shanghai or Taiwan on return day).
+      const areaLabel = day?.weatherLocation?.label || "";
+      const selectedText = [selected?.title, selected?.location].filter(Boolean).join(" ");
+      const regionApplies = !selected || (areaLabel && selectedText.includes(areaLabel));
+      const area = regionApplies ? day?.weatherLocation : null;
+      const embed = taiwan ? googleMapsEmbedUrl(selected) :
+        point ? amap.placeEmbedUrl(point) : amap.viewEmbedUrl(area);
       if (embed) {
-        const title = point ? "高德地圖 · " + (point.title || point.location) :
+        const title = taiwan ? "Google 地圖 · " + (selected.location || selected.title) :
+          point ? "高德地圖 · " + (point.title || point.location) :
           "高德地圖 · " + (area?.label || "行程區域");
         container.innerHTML = `<iframe class="china-map-iframe"
           title="${escapeAttr(title)}" src="${escapeAttr(embed)}"
           loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
       } else {
+        const search = selected ? googleMapsOpenUrl(selected) : "";
+        const name = selected?.location || selected?.title || "";
+        const flight = selected?.transportMode === "flight";
+        container.classList.add("map-lookup-only");
         container.innerHTML = `<div class="map-library-state map-library-fallback" role="status">
           <span class="map-state-mark" aria-hidden="true">${(window.TravelLiteIcons?.svg?.("map-pin") || "")}</span>
-          <div><strong>本日沒有可標註的確定位置</strong>
-          <p>交通與集合地點仍以領隊公告為準；可透過下方地點查詢高德地圖。</p></div></div>`;
+          <div><strong>${flight ? "飛行航段沒有地面路線圖" :
+            name ? "已知地點：" + escapeHtml(name) : "本日尚無可顯示的位置"}</strong>
+          <p>${flight ? "請參考航班資訊與來源註記的起降航廈。" :
+            name ? "地點名稱已知；地圖端尚無可嵌入的精確點位，請以地名搜尋。" :
+            "沒有可查閱的明確地點，請以領隊最新公告為準。"}</p>
+          ${search ? `<a class="button-link" href="${escapeAttr(search)}" target="_blank"
+            rel="noopener noreferrer">開啟高德地圖搜尋 ↗</a>` : ""}</div></div>`;
       }
       return;
     }
@@ -284,16 +302,19 @@
 
     const googleUrl = selected ? googleMapsOpenUrl(selected) : "";
     const isChina = window.TravelLiteChinaMaps?.isEnabled?.();
+    const isTaiwanTerminal = isChina && selected?.mapProvider === "google" && !!selected?.mapQuery;
+    const providerLabel = isTaiwanTerminal ? "Google 地圖" : isChina ? "高德地圖" : "Spatial reference";
+    const providerOpen = isTaiwanTerminal ? "開啟 Google Maps" : isChina ? "開啟高德" : "Open in Maps";
 
     root.innerHTML = `<div class="day-tabs map-day-tabs" aria-label="Map days">${dayTabs}</div>
       ${itemIdentityWarningHtml()}
       <section class="map-panel runtime-map-panel composition-narrative" data-surface-role="map-workspace" aria-label="Trip spatial reference">
-        <div class="map-heading"><div><p class="eyebrow">${isChina ? "高德地圖" : "Spatial reference"}</p><h2>${escapeHtml(selectedDay?.title || "Trip map")}</h2><p class="map-heading-copy">${isChina ? "已知景點顯示標記；其他項目僅提供區域地圖或地名查詢" : "Planned stops only · select a stop for context"}</p></div>${googleUrl ? `<a class="button-link map-primary-handoff" href="${escapeAttr(googleUrl)}" target="_blank" rel="noreferrer">${isChina ? "開啟高德" : "Open in Maps"} ↗</a>` : ""}</div>
+        <div class="map-heading"><div><p class="eyebrow">${providerLabel}</p><h2>${escapeHtml(selectedDay?.title || "Trip map")}</h2><p class="map-heading-copy">${isTaiwanTerminal ? "桃園機場第二航廈位置已知；團體櫃檯位置以領隊公告為準" : isChina ? "已知景點顯示標記；其他項目提供區域地圖或地名搜尋" : "Planned stops only · select a stop for context"}</p></div>${googleUrl ? `<a class="button-link map-primary-handoff" href="${escapeAttr(googleUrl)}" target="_blank" rel="noreferrer">${providerOpen} ↗</a>` : ""}</div>
         ${placeChips ? `<div class="place-chips" aria-label="Planned stops">${placeChips}</div>` : ""}
         <div class="map-stage">
-          <div id="runtime-map" class="interactive-map" aria-label="Interactive trip map"><div class="map-library-state map-library-loading" role="status"><span class="map-state-mark" aria-hidden="true">${(window.TravelLiteIcons?.svg?.("map-pin") || "")}</span><div><p class="eyebrow">${isChina ? "高德地圖" : "Spatial reference"}</p><strong>${isChina ? "載入地圖…" : "Loading planned stops…"}</strong><p>${isChina ? "地圖不影響查看已發布行程與外部連結。" : "Trip details remain available while the map loads."}</p></div></div></div>
+          <div id="runtime-map" class="interactive-map" aria-label="Interactive trip map"><div class="map-library-state map-library-loading" role="status"><span class="map-state-mark" aria-hidden="true">${(window.TravelLiteIcons?.svg?.("map-pin") || "")}</span><div><p class="eyebrow">${providerLabel}</p><strong>${isChina ? "載入地圖…" : "Loading planned stops…"}</strong><p>${isChina ? "地圖不影響查看已發布行程與外部連結。" : "Trip details remain available while the map loads."}</p></div></div></div>
         </div>
-        ${selected ? `<div class="selected-place-card map-selected-summary" data-surface-role="selected-stop" aria-label="Selected stop"><div><p class="eyebrow">Selected stop · ${escapeHtml(selected.start || "TBD")}</p><h3>${escapeHtml(selected.title || selected.location || "Place")}</h3><p>${escapeHtml(selected.location || "")}</p></div>${googleUrl ? `<a class="button-link map-secondary-handoff" href="${escapeAttr(googleUrl)}" target="_blank" rel="noreferrer">${isChina ? "高德查詢" : "Navigation"} ↗</a>` : ""}</div>` : ""}
+        ${selected ? `<div class="selected-place-card map-selected-summary" data-surface-role="selected-stop" aria-label="Selected stop"><div><p class="eyebrow">Selected stop · ${escapeHtml(selected.start || "TBD")}</p><h3>${escapeHtml(selected.title || selected.location || "Place")}</h3><p>${escapeHtml(selected.location || "")}</p></div>${googleUrl ? `<a class="button-link map-secondary-handoff" href="${escapeAttr(googleUrl)}" target="_blank" rel="noreferrer">${isTaiwanTerminal ? "Google 地圖" : isChina ? "高德查詢" : "Navigation"} ↗</a>` : ""}</div>` : ""}
       </section>`;
 
     root.querySelectorAll("[data-runtime-map-date]").forEach((button) => button.addEventListener("click", () => {

@@ -6,8 +6,8 @@
     "startDate": "2026-11-27",
     "endDate": "2026-12-04",
     "timezone": "Asia/Shanghai",
-    "updatedAt": "2026-11-19T20:55:00+08:00",
-    "revision": "xinjiang-2026-11-19-04",
+    "updatedAt": "2026-11-19T20:36:00+08:00",
+    "revision": "xinjiang-2026-11-19-05",
     "homeLabel": "新疆・中國",
     "center": {
       "lat": 43.78,
@@ -81,7 +81,9 @@
           "start": "12:00",
           "title": "團體集合｜桃園機場第二航廈",
           "location": "桃園國際機場 T2・東方航空團體櫃檯前",
-          "note": "攜帶台灣護照及有效台胞證正本，領隊協助辦理登機與行李直掛。"
+          "note": "攜帶台灣護照及有效台胞證正本，領隊協助辦理登機與行李直掛。",
+          "mapProvider": "google",
+          "mapQuery": "Taoyuan International Airport Terminal 2, Taoyuan, Taiwan"
         },
         {
           "id": "d1-mu5008",
@@ -950,7 +952,9 @@
           "title": "返抵桃園機場第二航廈",
           "start": "TBD",
           "location": "桃園國際機場 T2",
-          "note": "預定落地 17:40；實際入境、領行李與離開時間待現場安排。"
+          "note": "預定落地 17:40；實際入境、領行李與離開時間待現場安排。",
+          "mapProvider": "google",
+          "mapQuery": "Taoyuan International Airport Terminal 2, Taoyuan, Taiwan"
         }
       ]
     }

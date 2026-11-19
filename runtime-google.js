@@ -12,6 +12,12 @@
 
   googleMapsOpenUrl = function googleMapsReviewsUrl(item) {
     if (!item) return "";
+    // Only a source-labeled Taiwan stop may opt into Google's Taiwan coverage.
+    // The mainland stops remain Amap and no unsupported GPS is generated.
+    if (item.mapProvider === "google" && item.mapQuery) {
+      return "https://www.google.com/maps/search/?" +
+        new URLSearchParams({api: "1", query: item.mapQuery}).toString();
+    }
     if (window.TravelLiteChinaMaps?.isEnabled?.()) return window.TravelLiteChinaMaps.openUrl(item);
     if (item.mapsUrl) return item.mapsUrl;
     const query = googleTextQuery(item);
@@ -33,6 +39,12 @@
 
   googleMapsEmbedUrl = function officialGoogleMapsEmbedUrl(item) {
     if (!item) return "";
+    // Google Maps' published no-key search iframe can resolve the named
+    // Taiwan airport terminal; it does not imply a precise group-counter pin.
+    if (item.mapProvider === "google" && item.mapQuery) {
+      return "https://www.google.com/maps?q=" + encodeURIComponent(item.mapQuery) +
+        "&output=embed";
+    }
     if (window.TravelLiteChinaMaps?.isEnabled?.()) return window.TravelLiteChinaMaps.placeEmbedUrl(item);
     if (item.mapEmbedUrl) return item.mapEmbedUrl;
     const key = state.data.providers?.googleMapsEmbedKey;
