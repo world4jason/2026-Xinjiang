@@ -25,7 +25,8 @@
     "test:trip-layout": "node --test tests/trip-layout-contract.test.mjs",
     "test:trip-layout:browser": "playwright test tests/trip-responsive-layout.spec.mjs --project=chromium",
     "test:places-curation": "node --test tests/places-curation.test.mjs",
-    "test:places-curation:browser": "playwright test tests/places-curation.spec.mjs --project=chromium"
+    "test:places-curation:browser": "playwright test tests/places-curation.spec.mjs --project=chromium",
+    "test:china-maps": "node --test tests/china-maps.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
