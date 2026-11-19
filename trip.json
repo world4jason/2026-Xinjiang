@@ -14,7 +14,7 @@
       "lng": 87.6
     },
     "accent": "#285375",
-    "themeColor": "#0b1020",
+    "themeColor": "#f5f6f2",
     "publication": {
       "state": "draft",
       "humanGate": "not-run"
@@ -22,7 +22,7 @@
   },
   "ui": {
     "defaultView": "trip",
-    "theme": "system",
+    "theme": "light",
     "visualStyle": "editorial",
     "locale": "zh-TW",
     "bottomNav": [
