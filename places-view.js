@@ -167,6 +167,7 @@
     const photoSource = safeHttp(info.imageSource);
     const photoCaption = [info.imageCredit, info.imageLicense].filter(Boolean).join(" · ");
     const photoAlt = info.imageAlt || item.location || item.title;
+    const nonWinterPhoto = /非冬季|夏季/.test(photoAlt);
     const map = safeHttp(googleMapsOpenUrl(item));
     const facts = (Array.isArray(info.facts) ? info.facts : []).filter(Boolean);
     const sources = linksHtml(info.sourceLinks);
@@ -190,7 +191,7 @@
         <p class="eyebrow">${label("景點介紹", "PLACE GUIDE")}</p>
         <h3>${escapeHtml(info.title || item.title)}</h3>
         ${photo ? `<figure class="places-photo-figure"><img src="${escapeAttr(photo)}" alt="${escapeAttr(photoAlt)}" loading="lazy" referrerpolicy="no-referrer" class="places-photo">
-          ${photoCaption ? `<figcaption>${photoSource ? `<a href="${escapeAttr(photoSource)}" target="_blank" rel="noopener noreferrer">${escapeHtml(photoCaption)}</a>` : escapeHtml(photoCaption)}</figcaption>` : ""}</figure>` : ""}
+          ${photoCaption || nonWinterPhoto ? `<figcaption>${photoCaption ? (photoSource ? `<a href="${escapeAttr(photoSource)}" target="_blank" rel="noopener noreferrer">${escapeHtml(photoCaption)}</a>` : escapeHtml(photoCaption)) : ""}${nonWinterPhoto ? `<span class="places-photo-season">${label(" · 非冬季拍攝", " · Not photographed in winter")}</span>` : ""}</figcaption>` : ""}</figure>` : ""}
         ${info.summary ? `<p>${escapeHtml(info.summary)}</p>` : ""}
         ${facts.length ? `<ul>${facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join("")}</ul>` : ""}
         ${sources ? `<div class="places-links"><strong>${label("資料來源", "Sources")}</strong>${sources}</div>` : ""}
