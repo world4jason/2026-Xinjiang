@@ -23,6 +23,10 @@
     return { status, humanGate };
   }
   function warningHtml(onlyWarnings = false) {
+    // Trip-specific presentation preference: hide the repetitive publication
+    // banner, without changing draft/not-run metadata or source-backed risks.
+    // This is an explicit Xinjiang opt-in; other trips keep the default.
+    if (state.data?.ui?.hideGenericPublicationNotice === true) return "";
     const { status, humanGate } = publication();
     if (!status && !humanGate) return "";
     const showWarning = status === "draft" || humanGate === "waived" || humanGate === "not-run";

@@ -22,3 +22,9 @@
 - 旅行手冊明確提供桃園國際機場 **T2 第二航廈**；這是可以搜尋的確定建築物地名，不必因缺經緯度就顯示「沒有確定位置」。
 - 只有 `d1-assembly` 和 `d8-arrival-tpe` 以 `mapProvider: google`、`mapQuery: Taoyuan International Airport Terminal 2, Taoyuan, Taiwan` 開啟台灣境內 Google Maps 的免金鑰地名查詢與 iframe；**未標記具體東方航空團體櫃檯**，仍須以領隊通知為準。
 - 中國境內其餘項目使用高德地圖。跨城市／跨國航段不得誤用整天的天氣座標顯示錯誤區域；不能嵌圖時顯示精簡地名搜尋，不再留下一大片空白地圖。
+
+## 旅行查閱介面：移除重複的草案告示（2026/11/19）
+
+- 此行程 `trip.json.ui.hideGenericPublicationNotice=true`，僅略過旅途中所有分頁的 `trip-trust-notice` 通用「草案／人工驗收尚未執行」橫幅。仍保留 `trip.publication={state:"draft",humanGate:"not-run"}`，不能宣稱人工驗收已完成。
+- 已知但未確定的住宿「或同級」、自費滑雪、季節性藍冰、機場集合資訊與動態時刻確認均仍在各日行程／準備清單中，研究來源可在「更多」查閱。
+- 本開關只控制重複版面資訊，不移除真正有決策影響的提醒，也不修改原始 `Travel-lite-Template` 行為。

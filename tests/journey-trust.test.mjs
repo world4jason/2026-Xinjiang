@@ -35,3 +35,19 @@ test("No link is interpreted as human acceptance; unsafe sources are excluded", 
   assert.match(api.researchNotesHtml(), /&lt;script&gt;/);
   assert.doesNotMatch(api.researchNotesHtml(), /href="javascript:|<script>|<b>/);
 });
+
+test("Xinjiang can suppress repetitive publication notices without claiming acceptance", () => {
+  const trip = {
+    ui: { locale: "zh-TW", hideGenericPublicationNotice: true },
+    trip: { publication: { state: "draft", humanGate: "not-run" } },
+    days: [{ items: [{ title: "旅程景點", infoCard: {
+      sourceLinks: [{label:"官方來源", url:"https://example.org/place"}]
+    } }] }]
+  };
+  const api = fixture(trip);
+  assert.equal(api.warningHtml(true), "");
+  assert.equal(api.warningHtml(false), "");
+  // Source provenance remains accessible. Only the repeated banner goes away.
+  assert.match(api.researchNotesHtml(), /https:\/\/example\.org\/place/);
+  assert.deepEqual(trip.trip.publication, {state:"draft",humanGate:"not-run"});
+});
