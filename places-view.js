@@ -203,7 +203,7 @@
       ${window.TravelLitePlanB?.(item.planB) || ""}
       <nav class="panel places-actions" aria-label="${label("景點操作", "Place actions")}">
         <button type="button" class="button-link primary" data-places-trip="${escapeAttr(item.id)}">${label("查看當日行程", "View in Trip")}</button>
-        ${map ? `<a class="button-link" href="${escapeAttr(map)}" target="_blank" rel="noopener noreferrer">${label("在地圖中開啟", "Open in Maps")} ↗</a>` : ""}
+        ${map ? `<a class="button-link" href="${escapeAttr(map)}" target="_blank" rel="noopener noreferrer">${window.TravelLiteChinaMaps?.isEnabled?.() ? "高德地圖" : label("在地圖中開啟", "Open in Maps")} ↗</a>` : ""}
         <button type="button" class="button-link" data-places-transport="${escapeAttr(item.id)}">${label("交通與位置", "Transport & location")}</button>
       </nav>
     </div>`;

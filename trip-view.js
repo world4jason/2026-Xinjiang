@@ -142,7 +142,7 @@
     if (!mapUrl && !secondary.length) return "";
 
     const map = mapUrl
-      ? `<a class="trip-icon-action" href="${escapeAttr(mapUrl)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeAttr(item.title || "stop")} in Google Maps" title="Google Maps"><span aria-hidden="true">${(window.TravelLiteIcons?.svg?.("map-pin") || "")}</span></a>`
+      ? `<a class="trip-icon-action" href="${escapeAttr(mapUrl)}" target="_blank" rel="noreferrer" aria-label="${window.TravelLiteChinaMaps?.isEnabled?.() ? "高德地圖查詢：" : "Open in Google Maps: "}${escapeAttr(item.title || "stop")}" title="${window.TravelLiteChinaMaps?.isEnabled?.() ? "高德地圖" : "Google Maps"}"><span aria-hidden="true">${(window.TravelLiteIcons?.svg?.("map-pin") || "")}</span></a>`
       : "";
 
     const more = secondary.length
@@ -303,7 +303,7 @@
     return '<details class="trip-journey-details"><summary>' +
       '<span>' + escapeHtml(summary) + '</span><span class="trip-journey-chevron" aria-hidden="true">⌄</span></summary>' +
       '<ol class="trip-journey-legs" role="list">' + list + '</ol>' +
-      '<p class="trip-journey-map-note">' + escapeHtml(localized("Google Maps 可能推薦不同路線／班次，請以業者資訊為準。", "Google Maps may suggest different routes or times; check the operator.")) + '</p></details>';
+      '<p class="trip-journey-map-note">' + escapeHtml(window.TravelLiteChinaMaps?.isEnabled?.() ? "高德地圖僅供查詢終點或參考路線；團體車程以領隊安排為準。" : localized("Google Maps 可能推薦不同路線／班次，請以業者資訊為準。", "Google Maps may suggest different routes or times; check the operator.")) + '</p></details>';
   }
 
   function renderDay(day) {
@@ -338,9 +338,10 @@
       const journeyAction = journeyUrl
         ? '<a class="trip-journey-directions" href="' + escapeAttr(journeyUrl) +
           '" target="_blank" rel="noopener noreferrer" aria-label="' +
-          escapeAttr(localized("Google Maps 路線：", "Google Maps directions: ") + item.title) +
+          escapeAttr((window.TravelLiteChinaMaps?.isEnabled?.() ? "高德地圖查詢終點：" : localized("Google Maps 路線：", "Google Maps directions: ")) + item.title) +
           '">' + escapeHtml(item.title) + ' <span class="trip-journey-map-cta">' +
           (window.TravelLiteIcons?.svg?.("map-pin") || "") +
+          (window.TravelLiteChinaMaps?.isEnabled?.() ? '<span class="trip-journey-query-label">查終點</span>' : "") +
           '<span aria-hidden="true">↗</span></span></a>'
         : escapeHtml(item.title);
       const placeLink = !journey && window.TravelLitePlaces?.isPlace(item) && state.itemIdentity?.isUnique(item.id) ?

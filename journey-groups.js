@@ -72,6 +72,7 @@
     const modes=journey.legs.map(x=>x.transportMode);
     // Flights cannot be represented as a ground route. Do not claim otherwise.
     if(modes.includes("flight")) return "";
+    if (window.TravelLiteChinaMaps?.isEnabled?.()) return window.TravelLiteChinaMaps.journeyUrl(journey);
     const mode=modes.every(x=>x==="walk")?"walking":
       modes.every(x=>x==="drive")?"driving":"transit";
     return "https://www.google.com/maps/dir/?api=1&origin="+

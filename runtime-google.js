@@ -12,6 +12,7 @@
 
   googleMapsOpenUrl = function googleMapsReviewsUrl(item) {
     if (!item) return "";
+    if (window.TravelLiteChinaMaps?.isEnabled?.()) return window.TravelLiteChinaMaps.openUrl(item);
     if (item.mapsUrl) return item.mapsUrl;
     const query = googleTextQuery(item);
     if (!query) return "";
@@ -23,6 +24,7 @@
   window.googleMapsSearchUrl = function googleMapsSearchUrl(query, contextItem = null) {
     const search = String(query || "").trim();
     if (!search) return "";
+    if (window.TravelLiteChinaMaps?.isEnabled?.()) return window.TravelLiteChinaMaps.searchUrl(search);
     const context = googleTextQuery(contextItem);
     const fullQuery = context ? `${search} near ${context}` : search;
     const params = new URLSearchParams({ api: "1", query: fullQuery });
@@ -31,6 +33,7 @@
 
   googleMapsEmbedUrl = function officialGoogleMapsEmbedUrl(item) {
     if (!item) return "";
+    if (window.TravelLiteChinaMaps?.isEnabled?.()) return window.TravelLiteChinaMaps.placeEmbedUrl(item);
     if (item.mapEmbedUrl) return item.mapEmbedUrl;
     const key = state.data.providers?.googleMapsEmbedKey;
     const query = googleTextQuery(item);

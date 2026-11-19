@@ -37,11 +37,13 @@
     if (!item) return "";
     const src = googleMapsEmbedUrl(item);
     if (src) {
-      return `<div class="map-frame ${compact ? "compact" : ""}"><iframe title="Google Map for ${escapeAttr(item.title || item.location || "trip location")}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="${escapeAttr(src)}" allowfullscreen></iframe></div>`;
+      const title = (window.TravelLiteChinaMaps?.isEnabled?.() ? "高德地圖 · " : "Google Map for ") + (item.title || item.location || "trip location");
+      return `<div class="map-frame ${compact ? "compact" : ""}"><iframe title="${escapeAttr(title)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="${escapeAttr(src)}" allowfullscreen></iframe></div>`;
     }
     const open = googleMapsOpenUrl(item);
     if (!open) return "";
-    return `<section class="panel map-handoff ${compact ? "compact" : ""}"><div><p class="eyebrow">Map handoff</p><strong>${escapeHtml(item.title || item.location || "Place")}</strong><p>Open your normal map app for ratings, photos, live details and navigation.</p></div><a class="button-link" href="${escapeAttr(open)}" target="_blank" rel="noreferrer">Open Google Maps ↗</a></section>`;
+    const china = window.TravelLiteChinaMaps?.isEnabled?.();
+    return `<section class="panel map-handoff ${compact ? "compact" : ""}"><div><p class="eyebrow">${china ? "地圖查詢" : "Map handoff"}</p><strong>${escapeHtml(item.title || item.location || "Place")}</strong><p>${china ? "位置僅供參考，實際團體集合點由領隊公告。" : "Open your normal map app for ratings, photos, live details and navigation."}</p></div><a class="button-link" href="${escapeAttr(open)}" target="_blank" rel="noreferrer">${china ? "開啟高德地圖" : "Open Google Maps"} ↗</a></section>`;
   }
 
   window.mapPreview = mapPreview;
@@ -53,9 +55,10 @@
       Number.isFinite(Number(item.lat)) && Number.isFinite(Number(item.lng))
       || item.location || item.mapQuery
     );
+    const china = window.TravelLiteChinaMaps?.isEnabled?.();
     return `<div class="action-row">
-      ${hasPlace ? `<button class="button-link primary" type="button" data-map-item="${escapeAttr(item.id)}">Trip map</button>` : ""}
-      ${open ? `<a class="button-link" href="${escapeAttr(open)}" target="_blank" rel="noreferrer">Google Maps ↗</a>` : ""}
+      ${hasPlace ? `<button class="button-link primary" type="button" data-map-item="${escapeAttr(item.id)}">${china ? "行程地圖" : "Trip map"}</button>` : ""}
+      ${open ? `<a class="button-link" href="${escapeAttr(open)}" target="_blank" rel="noreferrer">${china ? "高德地圖" : "Google Maps"} ↗</a>` : ""}
     </div>`;
   };
 
@@ -166,11 +169,33 @@
     return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
   }
 
-  async function initMap(items, selected) {
+  async function initMap(items, selected, day) {
     const generation = ++mapInitGeneration;
     const container = document.querySelector("#runtime-map");
     if (!container) return;
     destroyMap();
+
+    // Xinjiang uses Amap's official key-free iframe rather than MapLibre tiles.
+    // An untimed or unlocated selected item never borrows another POI's pin.
+    if (window.TravelLiteChinaMaps?.isEnabled?.()) {
+      const amap = window.TravelLiteChinaMaps;
+      const point = itemCoordinates(selected) ? selected : null;
+      const area = day?.weatherLocation || null;
+      const embed = point ? amap.placeEmbedUrl(point) : amap.viewEmbedUrl(area);
+      if (embed) {
+        const title = point ? "高德地圖 · " + (point.title || point.location) :
+          "高德地圖 · " + (area?.label || "行程區域");
+        container.innerHTML = `<iframe class="china-map-iframe"
+          title="${escapeAttr(title)}" src="${escapeAttr(embed)}"
+          loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+      } else {
+        container.innerHTML = `<div class="map-library-state map-library-fallback" role="status">
+          <span class="map-state-mark" aria-hidden="true">${(window.TravelLiteIcons?.svg?.("map-pin") || "")}</span>
+          <div><strong>本日沒有可標註的確定位置</strong>
+          <p>交通與集合地點仍以領隊公告為準；可透過下方地點查詢高德地圖。</p></div></div>`;
+      }
+      return;
+    }
 
     const mappable = items.filter(itemCoordinates);
     if (!mappable.length) {
@@ -258,16 +283,17 @@
     }).join("");
 
     const googleUrl = selected ? googleMapsOpenUrl(selected) : "";
+    const isChina = window.TravelLiteChinaMaps?.isEnabled?.();
 
     root.innerHTML = `<div class="day-tabs map-day-tabs" aria-label="Map days">${dayTabs}</div>
       ${itemIdentityWarningHtml()}
       <section class="map-panel runtime-map-panel composition-narrative" data-surface-role="map-workspace" aria-label="Trip spatial reference">
-        <div class="map-heading"><div><p class="eyebrow">Spatial reference</p><h2>${escapeHtml(selectedDay?.title || "Trip map")}</h2><p class="map-heading-copy">Planned stops only · select a stop for context</p></div>${googleUrl ? `<a class="button-link map-primary-handoff" href="${escapeAttr(googleUrl)}" target="_blank" rel="noreferrer">Open in Maps ↗</a>` : ""}</div>
+        <div class="map-heading"><div><p class="eyebrow">${isChina ? "高德地圖" : "Spatial reference"}</p><h2>${escapeHtml(selectedDay?.title || "Trip map")}</h2><p class="map-heading-copy">${isChina ? "已知景點顯示標記；其他項目僅提供區域地圖或地名查詢" : "Planned stops only · select a stop for context"}</p></div>${googleUrl ? `<a class="button-link map-primary-handoff" href="${escapeAttr(googleUrl)}" target="_blank" rel="noreferrer">${isChina ? "開啟高德" : "Open in Maps"} ↗</a>` : ""}</div>
         ${placeChips ? `<div class="place-chips" aria-label="Planned stops">${placeChips}</div>` : ""}
         <div class="map-stage">
-          <div id="runtime-map" class="interactive-map" aria-label="Interactive trip map"><div class="map-library-state map-library-loading" role="status"><span class="map-state-mark" aria-hidden="true">${(window.TravelLiteIcons?.svg?.("map-pin") || "")}</span><div><p class="eyebrow">Spatial reference</p><strong>Loading planned stops…</strong><p>Trip details remain available while the map loads.</p></div></div></div>
+          <div id="runtime-map" class="interactive-map" aria-label="Interactive trip map"><div class="map-library-state map-library-loading" role="status"><span class="map-state-mark" aria-hidden="true">${(window.TravelLiteIcons?.svg?.("map-pin") || "")}</span><div><p class="eyebrow">${isChina ? "高德地圖" : "Spatial reference"}</p><strong>${isChina ? "載入地圖…" : "Loading planned stops…"}</strong><p>${isChina ? "地圖不影響查看已發布行程與外部連結。" : "Trip details remain available while the map loads."}</p></div></div></div>
         </div>
-        ${selected ? `<div class="selected-place-card map-selected-summary" data-surface-role="selected-stop" aria-label="Selected stop"><div><p class="eyebrow">Selected stop · ${escapeHtml(selected.start || "TBD")}</p><h3>${escapeHtml(selected.title || selected.location || "Place")}</h3><p>${escapeHtml(selected.location || "")}</p></div>${googleUrl ? `<a class="button-link map-secondary-handoff" href="${escapeAttr(googleUrl)}" target="_blank" rel="noreferrer">Navigation ↗</a>` : ""}</div>` : ""}
+        ${selected ? `<div class="selected-place-card map-selected-summary" data-surface-role="selected-stop" aria-label="Selected stop"><div><p class="eyebrow">Selected stop · ${escapeHtml(selected.start || "TBD")}</p><h3>${escapeHtml(selected.title || selected.location || "Place")}</h3><p>${escapeHtml(selected.location || "")}</p></div>${googleUrl ? `<a class="button-link map-secondary-handoff" href="${escapeAttr(googleUrl)}" target="_blank" rel="noreferrer">${isChina ? "高德查詢" : "Navigation"} ↗</a>` : ""}</div>` : ""}
       </section>`;
 
     root.querySelectorAll("[data-runtime-map-date]").forEach((button) => button.addEventListener("click", () => {
@@ -282,7 +308,7 @@
       renderMap();
     }));
 
-    initMap(items, selected);
+    initMap(items, selected, selectedDay);
   };
 
   window.addEventListener("beforeunload", destroyMap);
