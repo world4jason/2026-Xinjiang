@@ -6,8 +6,8 @@
     "startDate": "2026-11-27",
     "endDate": "2026-12-04",
     "timezone": "Asia/Shanghai",
-    "updatedAt": "2026-11-19T19:40:00+08:00",
-    "revision": "xinjiang-2026-11-19-01",
+    "updatedAt": "2026-11-19T11:58:35.072Z",
+    "revision": "xinjiang-2026-11-19-02",
     "homeLabel": "新疆・中國",
     "center": {
       "lat": 43.78,
@@ -42,32 +42,18 @@
   },
   "highlights": [
     {
-      "id": "departure-t2",
-      "dateLabel": "11/27",
-      "title": "12:00 桃園 T2 集合",
-      "status": "confirmed",
-      "note": "東方航空團體櫃檯前；護照與台胞證都要攜帶。"
-    },
-    {
-      "id": "he-mu-photo",
-      "dateLabel": "11/29",
-      "title": "禾木美麗峰旅拍",
-      "status": "included",
-      "note": "基礎妝造＋9 張精修照；建議搭配亮色圍巾。"
-    },
-    {
       "id": "optional-ski",
       "dateLabel": "11/28–11/29",
       "title": "將軍山夜滑／吉克普林",
-      "status": "optional",
+      "status": "自選・自費",
       "note": "雪票自理；雪場營運、入場與回程安排仍需當日確認。"
     },
     {
       "id": "lake-ice",
       "dateLabel": "12/02",
-      "title": "賽里木湖環湖",
-      "status": "planned",
-      "note": "VIP 專車環湖與航拍短影音；藍冰、冰泡、冰推視結冰與天氣，非保證。"
+      "title": "賽里木湖可能的藍冰／冰泡",
+      "status": "視冰況",
+      "note": "12/02 VIP 環湖屬主行程，但藍冰與冰泡通常需要更成熟的冰期，請勿視作保證。"
     }
   ],
   "days": [
@@ -1191,6 +1177,12 @@
           "url": "https://www.amap.com/"
         }
       ]
+    },
+    {
+      "id": "included-services",
+      "category": "團費與服務",
+      "title": "團體包含與自理範圍",
+      "body": "手冊列為包含：行程所列 2 輛七座 1+1 商務車與機場接送、7 晚雙人一室住宿（或同級）、6 頓飯店早餐、行程景點首道大門票、專業司機兼嚮導、全程線上管家、旅行社責任險及旅遊意外險。特色體驗包含 11/29 禾木美麗峰基礎妝造與 9 張精修、賽里木湖每人 1 條坦克跟車航拍短影音。午晚餐、11/30 早餐、將軍山夜滑／吉克普林雪票以及自選娛樂項目自理；其他保險範圍仍以正式保單為準。"
     }
   ],
   "notes": [
