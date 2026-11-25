@@ -6,8 +6,8 @@
     "startDate": "2026-11-27",
     "endDate": "2026-12-04",
     "timezone": "Asia/Shanghai",
-    "updatedAt": "2026-11-25T03:04:19.192Z",
-    "revision": "xinjiang-2026-11-25-handbook",
+    "updatedAt": "2026-11-25T03:17:54.693Z",
+    "revision": "xinjiang-2026-11-25-sim-activation-clarification",
     "homeLabel": "新疆・中國",
     "center": {
       "lat": 43.78,
@@ -995,7 +995,7 @@
     },
     {
       "id": "t-internet",
-      "label": "開通可在中國使用的漫遊／網卡，預先測試常用 App、下載離線資料",
+      "label": "確認電信漫遊服務或備妥中國旅遊 SIM／eSIM，抵達後依方案規定啟用；預先下載離線資料",
       "dueDate": "2026-11-26",
       "priority": "high"
     },
@@ -1041,7 +1041,7 @@
         },
         {
           "id": "mobile-data",
-          "label": "支援常用 App 的中國漫遊／旅遊網卡、聯絡方式（勿只依賴飯店 Wi-Fi）"
+          "label": "備妥中國旅遊 SIM／eSIM 或確認電信漫遊服務（抵達後依方案規定啟用；勿只依賴飯店 Wi-Fi）"
         },
         {
           "id": "offline-trip",
@@ -1247,7 +1247,7 @@
       "id": "internet-access",
       "category": "支付與網路",
       "title": "中國網路與飯店 Wi-Fi",
-      "body": "旅行社提醒：連上中國境內飯店 Wi-Fi 後，平常使用的 LINE、Google、Instagram、YouTube 等服務可能無法正常使用。出發前開通具境外網路路由的國際漫遊或旅遊 eSIM／網卡，向業者確認常用 App 支援，預先下載離線行程、地圖及重要文件；不要只依賴飯店 Wi-Fi。"
+      "body": "旅行社提醒：連上中國境內飯店 Wi-Fi 後，平常使用的 LINE、Google、Instagram、YouTube 等服務可能無法正常使用。出發前可確認台灣電信漫遊服務，或事先購買、備妥支援常用 App 的旅遊 SIM／eSIM；抵達中國後依所購方案規定啟用，勿提前啟動計費效期。預先下載離線行程、地圖及重要文件，不要只依賴飯店 Wi-Fi。"
     },
     {
       "id": "hemu-transfer",
