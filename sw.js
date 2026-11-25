@@ -3,7 +3,7 @@
 // shell/runtime, and activating one cannot delete the other's cache.
 const CACHE_PREFIX = "travel-lite:" + new URL(self.registration.scope).pathname
   .replace(/[^a-z0-9]/gi, "-") + ":";
-const CACHE = CACHE_PREFIX + "shell-v68-xinjiang-quiet-publication";
+const CACHE = CACHE_PREFIX + "shell-v69-xinjiang-handbook";
 const RUNTIME_CACHE = CACHE_PREFIX + "runtime-v1";
 const scopeUrl = (path) => new URL(path, self.registration.scope).href;
 const INDEX = scopeUrl("./index.html");
@@ -184,6 +184,10 @@ self.addEventListener("fetch", (event) => {
     if (runtimeHosts.has(url.hostname)) event.respondWith(staleWhileRevalidate(request, RUNTIME_CACHE));
     return;
   }
+
+  // Let the browser serve the original PDF (including range requests).
+  // A PDF navigation must never replace the cached HTML app shell.
+  if (url.pathname === new URL("./docs/xinjiang-predeparture-handbook.pdf", self.registration.scope).pathname) return;
 
   if (request.mode === "navigate") {
     event.respondWith(fetch(request).then((response) => {

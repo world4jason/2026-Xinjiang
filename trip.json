@@ -6,8 +6,8 @@
     "startDate": "2026-11-27",
     "endDate": "2026-12-04",
     "timezone": "Asia/Shanghai",
-    "updatedAt": "2026-11-25T02:53:00.000Z",
-    "revision": "xinjiang-2026-11-25-predeparture-hemu-choices",
+    "updatedAt": "2026-11-25T03:04:19.192Z",
+    "revision": "xinjiang-2026-11-25-handbook",
     "homeLabel": "新疆・中國",
     "center": {
       "lat": 43.78,
@@ -1290,6 +1290,14 @@
     {
       "label": "中國東方航空－官方網站",
       "url": "https://global.ceair.com/"
+    }
+  ],
+  "files": [
+    {
+      "id": "predeparture-handbook",
+      "title": "【曠野長明】北疆雙湖 8天7晚冬季行前說明手冊",
+      "type": "PDF・5 頁・3.3 MB",
+      "url": "./docs/xinjiang-predeparture-handbook.pdf"
     }
   ]
 }

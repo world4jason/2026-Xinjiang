@@ -25,6 +25,8 @@
 
 ### 行前資料
 
+- [旅行社原始行前說明手冊（PDF・5 頁）](docs/xinjiang-predeparture-handbook.pdf)：網站「更多 → 文件與票券」可開啟；可先下載供離線閱讀。
+
 - 四段班機、T2 12:00 集合與上海轉機：整理於 `trip.json`。
 - 證件、CCC 行動電源、極寒穿搭、6 頓早餐／自理餐、支付與網卡：見網站「更多」及 `trip.json` 的 `checklists`、`essentials`。
 - 景點來自可核對的政府／觀光資訊，10 個景點座標提供高德地圖外部連結；使用 Wikimedia Commons 圖片的卡片附作者與授權。
