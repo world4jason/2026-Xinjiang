@@ -6,8 +6,8 @@
     "startDate": "2026-11-27",
     "endDate": "2026-12-04",
     "timezone": "Asia/Shanghai",
-    "updatedAt": "2026-11-26T05:17:00.000Z",
-    "revision": "xinjiang-2026-11-26-dynamic-burqin-weather",
+    "updatedAt": "2026-11-26T05:59:34.703Z",
+    "revision": "xinjiang-2026-11-26-deduplicate-checklists",
     "homeLabel": "新疆・中國",
     "center": {
       "lat": 43.78,
@@ -995,30 +995,6 @@
   ],
   "todos": [
     {
-      "id": "t-passport",
-      "label": "確認護照與台胞證正本有效、放隨身袋",
-      "dueDate": "2026-11-26",
-      "priority": "high"
-    },
-    {
-      "id": "t-payment",
-      "label": "完成支付寶／微信支付實名認證與信用卡綁定",
-      "dueDate": "2026-11-26",
-      "priority": "high"
-    },
-    {
-      "id": "t-ccc",
-      "label": "確認行動電源清楚 CCC（3C）與額定容量 ≤100Wh，放隨身行李",
-      "dueDate": "2026-11-26",
-      "priority": "high"
-    },
-    {
-      "id": "t-internet",
-      "label": "確認電信漫遊服務或備妥中國旅遊 SIM／eSIM，抵達後依方案規定啟用；預先下載離線資料",
-      "dueDate": "2026-11-26",
-      "priority": "high"
-    },
-    {
       "id": "t-check-guide",
       "label": "確認 11/28 夜滑及 11/29 旅拍／滑雪二選一、雪具載運與集合安排",
       "dueDate": "2026-11-26",
@@ -1032,7 +1008,7 @@
     },
     {
       "id": "t-hemu-small-bag",
-      "label": "準備禾木後背包或小型手提行李；選滑雪者提前整理雪具",
+      "label": "11/28 整理禾木一晚小行李（後背包或小型手提行李；依行前須知分裝，滑雪者另取出雪具）",
       "dueDate": "2026-11-28",
       "priority": "high"
     }
@@ -1044,7 +1020,7 @@
       "items": [
         {
           "id": "passport",
-          "label": "中華民國護照正本（有效）"
+          "label": "中華民國護照正本（有效，隨身攜帶）"
         },
         {
           "id": "taiwan-permit",
@@ -1065,10 +1041,6 @@
         {
           "id": "offline-trip",
           "label": "預先下載離線行程、地圖及重要文件"
-        },
-        {
-          "id": "valuables",
-          "label": "護照、台胞證及其他貴重物品隨身妥善保管"
         }
       ]
     },
@@ -1094,7 +1066,7 @@
         },
         {
           "id": "hat",
-          "label": "遮耳毛帽、圍巾／防風面罩"
+          "label": "遮耳毛帽、圍巾／防風面罩（旅拍可選亮色圍巾）"
         },
         {
           "id": "gloves",
@@ -1136,7 +1108,7 @@
         },
         {
           "id": "tissues",
-          "label": "衛生紙及個人清潔用品"
+          "label": "衛生紙、盥洗及個人清潔用品"
         },
         {
           "id": "medicines",
@@ -1162,41 +1134,25 @@
         },
         {
           "id": "spare-battery",
-          "label": "備用鋰電池：容量標示清楚，分開防短路、隨身攜帶不託運"
+          "label": "備用鋰電池（容量標示清楚、防短路、隨身攜帶不託運；低溫貼身保暖）"
         },
         {
           "id": "cameras",
-          "label": "相機／手機與充電器；低溫耗電較快，手機及備用電池貼身保暖"
-        },
-        {
-          "id": "bright-scarf",
-          "label": "11/29 禾木旅拍可用亮色圍巾（選配）"
+          "label": "相機、手機及充電器（低溫耗電較快，手機貼身保暖）"
         }
       ]
     },
     {
       "id": "hemu-small-bag",
-      "title": "禾木小行李（11/29 換小車）",
+      "title": "換洗衣物與滑雪裝備",
       "items": [
         {
-          "id": "small-bag",
-          "label": "後背包或小型手提行李"
-        },
-        {
           "id": "overnight-clothes",
-          "label": "換洗衣物、保暖內搭、備用襪"
-        },
-        {
-          "id": "overnight-toiletries",
-          "label": "盥洗用品、護唇膏、乳液、個人藥品"
-        },
-        {
-          "id": "overnight-electronics",
-          "label": "隨身證件、手機、相機、充電設備"
+          "label": "換洗衣物"
         },
         {
           "id": "ski-gear",
-          "label": "選吉克普林滑雪者：雪衣雪褲、雪鏡、手套、安全帽與其他個人雪具；大型雪具袋另確認載運方式"
+          "label": "滑雪專用雪具（滑雪者：雪衣雪褲、雪鏡、安全帽、雪板及其他個人雪具）"
         }
       ]
     }
