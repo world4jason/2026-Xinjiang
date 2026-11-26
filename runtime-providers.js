@@ -88,5 +88,42 @@ const TravelLiteProviders = (() => {
     return cachedFetchJson(key, cfg.historicalWeatherEndpoint + "?" + params, {}, 24 * 60 * 60 * 1000);
   }
 
-  return { config, weather, recentWeather, historicalWeather };
+  // Resolve a named, planned secondary weather area using the same provider's
+  // GeoNames search. Never select a prefecture/county or a fuzzy first result.
+  async function weatherPlace(place) {
+    const normalize = value => String(value ?? "").normalize("NFKC").toLowerCase()
+      .replace(/[^\p{L}\p{N}]/gu, "");
+    const country = String(place?.countryCode || "").toUpperCase();
+    const region = normalize(place?.admin1);
+    const query = String(place?.query || "").trim();
+    if (!query || !/^[A-Z]{2}$/.test(country) || !region) return null;
+    const aliases = [query, ...(Array.isArray(place.aliases) ? place.aliases : [])]
+      .filter(value => typeof value === "string" && value.trim()).slice(0, 12);
+    const names = new Set(aliases.map(normalize));
+    // Search a bounded set of spellings. The returned coordinates are accepted
+    // only for a uniquely matched populated place in the specified region.
+    for (const name of aliases.slice(0, 4)) {
+      const params = new URLSearchParams({name, countryCode:country, count:"20", language:"en", format:"json"});
+      const key = "weather:geocode:" + country + ":" + normalize(name);
+      let result;
+      try {
+        result = await cachedFetchJson(key,
+          "https://geocoding-api.open-meteo.com/v1/search?" + params, {}, 30 * 24 * 60 * 60 * 1000);
+      } catch { continue; }
+      const matches = (Array.isArray(result?.results) ? result.results : []).filter(item =>
+        item?.country_code === country && normalize(item.admin1).includes(region) &&
+        /^PPL/.test(String(item.feature_code || "")) && names.has(normalize(item.name)) &&
+        typeof item.latitude === "number" && typeof item.longitude === "number" &&
+        Number.isFinite(item.latitude) && Number.isFinite(item.longitude) &&
+        Math.abs(item.latitude) <= 90 && Math.abs(item.longitude) <= 180);
+      const points = new Map(matches.map(item => [
+        coordinateKey(item.latitude,item.longitude), {lat:item.latitude,lng:item.longitude}
+      ]));
+      if (points.size === 1) return points.values().next().value;
+      if (points.size > 1) return null;
+    }
+    return null;
+  }
+
+  return { config, weather, recentWeather, historicalWeather, weatherPlace };
 })();

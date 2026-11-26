@@ -29,6 +29,7 @@
 2. Otherwise use only a **known, source-backed coordinate for a scheduled venue/item on that day**.
 3. If neither exists, omit that day's weather. **Never** reuse Osaka (or day one) for all Kyoto, Ise, Kumano or other multi-city days, and never invent a coordinate from a place label.
 4. Date and city are paired: avoid showing the wrong city name when the itinerary moves across regions within the same day. Weather is area-level context, not an exact microclimate at every stop.
+5. A multi-region day may opt into `additionalWeatherLocations` for up to three separately labelled, scheduled areas (e.g. an overnight city). The main strip retains one primary weather point per day; only the selected day displays compact secondary weather rows below the strip. For named points, use Open-Meteo/GeoNames with exact supported name aliases, country and region, and a unique populated-place result; do not silently fall back to a county/prefecture. Omit unresolved or unavailable rows and label forecast, historical model weather and stale cache explicitly. Never copy a screenshot forecast into static reminders.
 
 ## 4. Loading, caching, privacy and edge states
 

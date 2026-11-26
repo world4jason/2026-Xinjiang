@@ -109,3 +109,80 @@ test("historical dates, recent past and upcoming dates choose their real provide
     }
   }
 });
+
+test("Burqin weather configuration is dynamic, city-scoped, and preserves Kanas primary point",()=>{
+  const trip=JSON.parse(source("trip.json"));
+  const day=trip.days.find(day=>day.date==="2026-11-30");
+  assert.equal(day.weatherLocation.label,"喀納斯湖");
+  assert.equal(day.additionalWeatherLocations[0].query,"Burqin");
+  assert.equal(day.additionalWeatherLocations[0].countryCode,"CN");
+  assert.equal(day.additionalWeatherLocations[0].admin1,"Xinjiang");
+  assert.ok(day.reminders.every(text=>!String(text).includes("天氣截圖預報")));
+});
+
+test("secondary place geocoding accepts only a unique exact populated place in region",async()=>{
+  const fixture={query:"Burqin",aliases:["Buerjin"],countryCode:"CN",admin1:"Xinjiang"};
+  // Synthetic coordinates: this test does not assert real-world positions.
+  const city={name:"Burqin",country_code:"CN",admin1:"Xinjiang",feature_code:"PPLA3",latitude:47.7,longitude:86.8};
+  const county={...city,name:"Burqin",feature_code:"ADM3",latitude:48,longitude:87};
+  const wrongRegion={...city,admin1:"Other",latitude:40,longitude:100};
+  const wrongCountry={...city,country_code:"KZ"};
+  const wrongName={...city,name:"Other"};
+  async function resolve(results) {
+    const ctx={state:{data:{}},URLSearchParams,TravelLiteStorage:{get:async()=>null,set:async()=>{}},
+      fetch:async url=>{
+        assert.match(url,/^https:\/\/geocoding-api\.open-meteo\.com\/v1\/search\?/);
+        assert.match(url,/countryCode=CN/);
+        return {ok:true,json:async()=>({results})};
+      }};
+    runInNewContext(source("runtime-providers.js")+"\nthis.provider = TravelLiteProviders;",ctx);
+    return ctx.provider.weatherPlace(fixture);
+  }
+  const resolved=await resolve([county,wrongRegion,wrongCountry,wrongName,city]);
+  assert.equal(resolved.lat,47.7);assert.equal(resolved.lng,86.8);
+  assert.equal(await resolve([county,wrongRegion,wrongCountry,wrongName]),null);
+  assert.equal(await resolve([city,{...city,latitude:47.9}]),null);
+});
+
+test("secondary weather uses resolved city and matching date, supports history/cache and omits missing data",async()=>{
+  for(const [date,route,stale,valid,connected] of [
+    ["2026-11-30","forecast",false,true,true],
+    ["2026-11-15","recent",true,true,true],
+    ["2024-11-30","archive",false,true,true],
+    ["2026-11-30","forecast",false,false,true],
+    ["2026-11-30","forecast",false,true,false],
+    ["2026-12-30",null,false,true,true]
+  ]){
+    const calls=[],target={hidden:true,innerHTML:""};
+    const nav={isConnected:connected,querySelector:()=>target};
+    const point={lat:47.7,lng:86.8};
+    const response={__stale:stale,daily:{time:[date],weather_code:[71],
+      temperature_2m_max:[valid?-2:null],temperature_2m_min:[-7],
+      precipitation_sum:[2.5],precipitation_probability_max:[40]}};
+    const day={date,weatherLocation:{label:"Kanas",lat:48.7,lng:87},additionalWeatherLocations:[
+      {label:"布爾津縣城・住宿地",query:"Burqin",countryCode:"CN",admin1:"Xinjiang"}
+    ]};
+    const ctx={state:{data:{ui:{locale:"zh-Hant"},trip:{timezone:"Asia/Shanghai"},days:[day]},ready:false,view:"trip",selectedDate:date},
+      document:{querySelector:()=>({querySelector:()=>null})},MutationObserver:class{observe(){}},
+      addEventListener(){},queueMicrotask(){},escapeHtml:x=>String(x??""),escapeAttr:x=>String(x??""),
+      TravelLiteProviders:{weatherPlace:async entry=>{assert.equal(entry.query,"Burqin");return point;},
+        weather:async(lat,lng)=>{calls.push(["forecast",lat,lng]);return response;},
+        recentWeather:async(lat,lng)=>{calls.push(["recent",lat,lng]);return response;},
+        historicalWeather:async(lat,lng)=>{calls.push(["archive",lat,lng]);return response;}}};
+    ctx.window=ctx;
+    runInNewContext(dateSource.replace("window.TravelLiteDateNav = Object.freeze({",
+      "window.TravelLiteDateNav = Object.freeze({loadAdditionalWeather,"),ctx);
+    await ctx.TravelLiteDateNav.loadAdditionalWeather(nav,day,Date.parse("2026-11-26T00:00:00Z"));
+    assert.equal(calls[0]?.[0]||null,connected?route:null);
+    if(connected&&route) assert.deepEqual(calls[0].slice(1),[47.7,86.8]);
+    if(connected&&route&&valid){
+      assert.equal(target.hidden,false);
+      assert.match(target.innerHTML,/布爾津縣城/);
+      assert.match(target.innerHTML,/-7–-2°C/);
+      assert.match(target.innerHTML,/<svg/);
+      if(route==="forecast") assert.match(target.innerHTML,/降水機率 40%/);
+      else {assert.match(target.innerHTML,/歷史天氣（模式估計）/);assert.match(target.innerHTML,/2\.5 mm/);assert.doesNotMatch(target.innerHTML,/%/);}
+      if(stale) assert.match(target.innerHTML,/快取/);
+    }else{assert.equal(target.hidden,true);assert.equal(target.innerHTML,"");}
+  }
+});

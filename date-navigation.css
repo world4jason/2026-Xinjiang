@@ -234,3 +234,14 @@
   .unified-date-card[data-weather-state="historical"],
   .unified-date-card[data-weather-state="forecast"] { min-height:138px; }
 }
+
+/* Optional second scheduled area: selected day only, no duplicate date state. */
+.unified-date-extra-weather[hidden] { display:none !important; }
+.unified-date-extra-weather { display:grid; gap:6px; min-width:0; }
+.unified-date-extra-weather-row {
+  display:flex; flex-wrap:wrap; align-items:center; gap:6px 9px;
+  min-width:0; font-size:.77rem; line-height:1.5; overflow-wrap:anywhere;
+}
+.unified-date-extra-weather-row svg { flex:none; width:22px; height:22px; color:var(--accent); }
+.unified-date-extra-weather-row small { color:var(--muted); font-size:.7rem; }
+.unified-date-card-kind { max-width:100%; overflow-wrap:anywhere; white-space:normal; }

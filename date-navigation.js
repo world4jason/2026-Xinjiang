@@ -141,6 +141,7 @@
         '><span aria-hidden="true">→</span></button></div></div>' +
       '<div class="unified-date-strip" data-unified-date-strip role="group" aria-label="' +
         att(tr("滑動選擇日期", "Scrollable day selector")) + '">' + cards + '</div>' +
+      '<div class="unified-date-extra-weather" data-additional-weather hidden></div>' +
       '<p class="unified-date-weather-note">' +
         esc(tr("天氣來源：", "Weather: ")) +
         '<a href="https://open-meteo.com/" rel="noopener noreferrer" target="_blank">Open-Meteo</a>' +
@@ -211,7 +212,11 @@
       if (weather) { weather.innerHTML = weatherSvg(Number(code)); weather.hidden = false; }
       if (temperature) { temperature.textContent = hi + "° / " + lo + "°"; temperature.hidden = false; }
       if (kind) {
-        kind.textContent = historical ? tr("歷史", "History") : tr("預報", "Forecast");
+        const day = days().find(candidate => candidate.date === date);
+        const location = day?.additionalWeatherLocations?.length && day.weatherLocation?.label;
+        kind.textContent = (location ? location + " · " : "") +
+          (historical ? tr("歷史", "History") : tr("預報", "Forecast")) +
+          (data.__stale ? " · " + tr("快取", "cached") : "");
         kind.hidden = false;
       }
       const rain = historical ? data.daily.precipitation_sum?.[idx] :
@@ -228,12 +233,58 @@
       card.setAttribute("aria-label", dayLabel(date, true) + " · " + title);
     }
   }
+  async function loadAdditionalWeather(nav, day, todayStamp) {
+    const target = nav.querySelector("[data-additional-weather]");
+    const entries = Array.isArray(day?.additionalWeatherLocations) ?
+      day.additionalWeatherLocations.slice(0,3) : [];
+    if (!target || !entries.length) return;
+    const diff = Math.round((Date.parse(day.date + "T00:00:00Z") - todayStamp) / 86400000);
+    if (!Number.isFinite(diff) || diff > 15) return;
+    const historical = diff < 0;
+    const rows = await Promise.all(entries.map(async entry => {
+      if (typeof entry?.label !== "string" || !entry.label.trim()) return "";
+      try {
+        const point = validPoint(entry) || validPoint(await TravelLiteProviders.weatherPlace?.(entry));
+        if (!point || !nav.isConnected) return "";
+        const data = diff < -92 ? await TravelLiteProviders.historicalWeather?.(point.lat,point.lng,day.date,day.date) :
+          diff < 0 ? await TravelLiteProviders.recentWeather?.(point.lat,point.lng,-diff) :
+          await TravelLiteProviders.weather(point.lat,point.lng);
+        const idx = data?.daily?.time?.indexOf(day.date) ?? -1;
+        if (idx < 0) return "";
+        const code = data.daily.weather_code?.[idx];
+        const high = data.daily.temperature_2m_max?.[idx];
+        const low = data.daily.temperature_2m_min?.[idx];
+        if (code == null || high == null || low == null ||
+          !Number.isFinite(Number(code)) || !Number.isFinite(Number(high)) ||
+          !Number.isFinite(Number(low))) return "";
+        const [symbol,condition] = forecastSymbol(Number(code));
+        if (!symbol) return "";
+        const rain = historical ? data.daily.precipitation_sum?.[idx] :
+          data.daily.precipitation_probability_max?.[idx];
+        const precipitation = rain != null && Number.isFinite(Number(rain)) ?
+          " · " + (historical ? tr("降水 ", "Precipitation ") + Number(rain).toFixed(1) + " mm" :
+          tr("降水機率 ", "Precipitation chance ") + Math.round(Number(rain)) + "%") : "";
+        const label = historical ? tr("歷史天氣（模式估計）", "Historical model weather") :
+          tr("預報", "Forecast");
+        const status = label + (data.__stale ? " · " + tr("快取", "cached") : "");
+        return '<div class="unified-date-extra-weather-row"><strong>' + esc(entry.label) +
+          '</strong>' + weatherSvg(Number(code)) + '<span>' + esc(condition + " · " +
+          Math.round(Number(low)) + "–" + Math.round(Number(high)) + "°C" + precipitation) +
+          '</span><small>' + esc(status) + '</small></div>';
+      } catch { return ""; }
+    }));
+    if (!nav.isConnected) return;
+    target.innerHTML = rows.filter(Boolean).join("");
+    target.hidden = !target.innerHTML;
+  }
   function loadWeather(nav) {
     if (typeof TravelLiteProviders === "undefined" || !TravelLiteProviders.weather) return;
     const current = typeof zonedNow === "function" ?
       zonedNow(state.data.trip.timezone).date : "";
     const todayStamp = Date.parse(current + "T00:00:00Z");
     if (!Number.isFinite(todayStamp)) return;
+    const selectedDay = days().find(day => day.date === mode(state.view));
+    if (typeof nav.querySelector === "function") void loadAdditionalWeather(nav, selectedDay, todayStamp);
     const grouped = new Map();
     for (const day of days()) {
       const diff = Math.round((Date.parse(day.date + "T00:00:00Z") - todayStamp) / 86400000);

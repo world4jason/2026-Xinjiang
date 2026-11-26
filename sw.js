@@ -3,7 +3,7 @@
 // shell/runtime, and activating one cannot delete the other's cache.
 const CACHE_PREFIX = "travel-lite:" + new URL(self.registration.scope).pathname
   .replace(/[^a-z0-9]/gi, "-") + ":";
-const CACHE = CACHE_PREFIX + "shell-v69-xinjiang-handbook";
+const CACHE = CACHE_PREFIX + "shell-v70-xinjiang-burqin-weather";
 const RUNTIME_CACHE = CACHE_PREFIX + "runtime-v1";
 const scopeUrl = (path) => new URL(path, self.registration.scope).href;
 const INDEX = scopeUrl("./index.html");
@@ -18,7 +18,7 @@ const CORE = [
   "./companion-ux.css",
   "./places-view.css?v=20261119-places-v1",
   "./long-trip-nav.css",
-  "./date-navigation.css?v=20261118-history-v2",
+  "./date-navigation.css?v=20261126-burqin-weather-v1",
   "./flight-overview.css?v=20261118-weatherstrip-v1",
   "./uiux-guard.css?v=20261118-inset-v1",
   "./journey-groups.css?v=20261119-trip-grid-v2",
@@ -52,7 +52,7 @@ const CORE = [
   "./china-maps.js?v=20261119-amap-v1",
   "./app.js?v=20261119-overview-light-v1",
   "./trip-view.js?v=20261119-amap-extras-v5",
-  "./runtime-providers.js?v=20261118-history-v2",
+  "./runtime-providers.js?v=20261126-burqin-weather-v1",
   "./runtime-features.js?v=20261119-t2-v3",
   "./runtime-handoff.js",
   "./places-view.js?v=20261119-amap-venue-v3",
@@ -63,7 +63,7 @@ const CORE = [
   "./companion-ux.js?v=20261119-overview-light-v1",
   "./timezone.js",
   "./long-trip-nav.js",
-  "./date-navigation.js?v=20261119-trip-grid-v2",
+  "./date-navigation.js?v=20261126-burqin-weather-v1",
   "./flight-overview.js?v=20261118-weatherstrip-v1",
   "./today-brief.js?v=20261119-trip-grid-v2",
   "./journey-trust.js?v=20261120-quiet-publication-v1",
